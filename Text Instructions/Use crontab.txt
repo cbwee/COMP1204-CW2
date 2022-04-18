@@ -1,0 +1,6 @@
+Run the command and select nano as the editor, to use crontab as the root user:
+sudo crontab -e
+
+Add the line below (and save the file) to automatically restart the XAMPP server on reboot:
+
+@reboot /home/user/COMP1204-CW2/lampp.sh
