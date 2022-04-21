@@ -5,5 +5,3 @@
 	SHOW DATABASES;
 	USE weatherJB;
 EOF
-
-#Test
