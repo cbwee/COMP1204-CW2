@@ -34,9 +34,10 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	
-	IF NOT EXISTS(SELECT * FROM cpuTemp) THEN\
-      	SELECT 'TEST';\	
+	#IF NOT EXISTS(SELECT * FROM cpuTemp) THEN\
+      	#SELECT 'TEST';\	
 	"
+	#// plan to add reset auto increment if table is empty
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
