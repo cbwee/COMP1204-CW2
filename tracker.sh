@@ -34,7 +34,9 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	IF NOT EXISTS (select * from cpuTemp)\
+	BEGIN\
 		ALTER TABLE cpuTemp AUTO_INCREMENT = 1;\
+	END\
 	"
 fi
 
