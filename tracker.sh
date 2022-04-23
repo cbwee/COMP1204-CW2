@@ -16,8 +16,8 @@ fi
 echo "Login MySQL: $login_MySQL"
 
 $login_MySQL<<EOF
-	CREATE DATABASE IF NOT EXISTS weatherJB;
-	USE weatherJB;
+	CREATE DATABASE IF NOT EXISTS weather_jb;
+	USE weather_jb;
 EOF
 
 if [ $is_raspi = true ] ; then
@@ -25,8 +25,8 @@ if [ $is_raspi = true ] ; then
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	echo "CPU Temperature: $CPU_temp_c °C"
 	
-	$login_MySQL -e "CREATE DATABASE IF NOT EXISTS cpuTemp;\
-	USE cpuTemp;\
+	$login_MySQL -e "CREATE DATABASE IF NOT EXISTS cputemp;\
+	USE cputemp;\
 	CREATE TABLE IF NOT EXISTS cpuTemp(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
     	Temperature int NOT NULL,\
