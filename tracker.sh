@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Check if this computer is a Raspberry Pi
 is_raspi=false
-# Check if this computer is a Raspberry Pi (running GNU/Linux, not Android)
+# Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
 if [[ $(uname -r) == @(*"v8+"*|*"v7l+"*) ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
