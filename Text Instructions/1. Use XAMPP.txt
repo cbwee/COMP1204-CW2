@@ -1,4 +1,4 @@
-Download XAMPP for Linux:
+Download XAMPP for Linux (64-bit):
 https://www.apachefriends.org/download.html
 
 Run the installer:
@@ -13,7 +13,6 @@ Log in MySQL as root user:
 
 Add XAMPP to environment variables:
 sudo nano /etc/environment
-
 
 Add the line below to the PATH variable  (within the quotation marks) and save the file (ctrl + s and ctrl + x):
 
