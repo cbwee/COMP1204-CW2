@@ -22,6 +22,8 @@ mysql -u root<<EOF
 	USE weatherJB;
 EOF
 
-
+if [ $is_raspi = true ] ; then
+    echo 'Test'
+fi
 
 mysql -u root -e "SHOW DATABASES;"
