@@ -33,6 +33,9 @@ if [ $is_raspi = true ] ; then
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
+	
+	IF NOT EXISTS (SELECT * FROM cpuTemp) THEN SELECT '>';
+	"
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
