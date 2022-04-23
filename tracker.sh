@@ -34,10 +34,11 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	
-	IF EXISTS (select * from cpuTemp)\
-	SELECT 'Table is not empty';\
-	ELSE\
+	DELIMITER //
+	
+	IF NOT EXISTS (select * from cpuTemp) THEN\
 	SELECT 'Table is empty';\
+	END IF;\
 	"
 
 fi
