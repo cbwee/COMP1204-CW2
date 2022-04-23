@@ -34,7 +34,8 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	
-	IF NOT EXISTS (select * from cpuTemp) THEN # Reset auto increment if the table is empty\
+	# Reset auto increment if the table is empty
+	IF NOT EXISTS (select * from cpuTemp) THEN\
 	ALTER TABLE cpuTemp AUTO_INCREMENT = 1;\
 	END IF;\
 	"
