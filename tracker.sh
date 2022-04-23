@@ -33,17 +33,6 @@ if [ $is_raspi = true ] ; then
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
-	
-	DELIMITER //
-	BEGIN\
-	IF NOT EXISTS (select * from cpuTemp) THEN\
-		SELECT 'Table is empty';\
-   		statements;\
-	END IF;\
-	END;\
-	//\
-	DELIMITER ;\
-	"
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
