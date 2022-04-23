@@ -1,5 +1,11 @@
 #!/bin/bash
 
+user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
+address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
+page=$(curl -A "$user_agent" $address)
+
+echo $page
+
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
 if [[ $(uname -r) == @(*"v8+"*|*"v7l+"*) ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
