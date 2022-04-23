@@ -27,6 +27,12 @@ if [ $is_raspi = true ] ; then
 	
 	$login_MySQL -e "CREATE DATABASE IF NOT EXISTS cpuTemp;\
 	USE cpuTemp;\
+	CREATE TABLE IF NOT EXISTS cpuTemp(\
+   	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
+    	Temperature int NOT NULL,\
+    	DateTime DateTime NOT NULL,\
+    	PRIMARY KEY (ID)\
+	);\
 	"
 
 fi
