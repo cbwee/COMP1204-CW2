@@ -33,10 +33,6 @@ if [ $is_raspi = true ] ; then
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
-	
-	DELIMITER //\	
-	IF NOT EXISTS (select * from cpuTemp) THEN\
-	SELECT 'Table is empty';\
 	"
 fi
 
