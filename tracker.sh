@@ -5,7 +5,7 @@ address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/2
 page=$(curl -A "$user_agent" $address)
 
 temperatures=$(echo $page | grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-echo temeratures
+echo $temeratures
 
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
