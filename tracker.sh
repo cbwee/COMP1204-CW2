@@ -27,4 +27,4 @@ if [ $is_raspi = true ] ; then
 	echo "CPU Temperature: $CPU_temp_c °C"
 fi
 
-mysql -u root -e "SHOW DATABASES;"
+$login_MySQL -e "SHOW DATABASES;"
