@@ -3,7 +3,6 @@
 # Check if this computer is a Raspberry Pi
 is_raspi=false
 
-"$STR" == *"$SUB"* ]
 if [(uname -r) == *"v7l+"*] && [(uname -m) == "armv7l"]; then
 	is_raspi= true;
 fi
