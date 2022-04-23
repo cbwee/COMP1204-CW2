@@ -3,7 +3,7 @@
 # Check if this computer is a Raspberry Pi
 is_raspi=false
 # Check if this computer is a Raspberry Pi (running GNU/Linux, not Android)
-if [[ $(uname -r) == (*"v8+"* || *"v7l+"*) ]] && [[ $(uname -m) == ("aarch64" || "armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
+if [[ $(uname -r) == @(*"v8+"*|*"v7l+"*) ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
 
