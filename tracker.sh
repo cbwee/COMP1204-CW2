@@ -2,7 +2,8 @@
 
 # Check if this computer is a Raspberry Pi
 is_raspi=false
-if [[ $(uname -r) == *"v7l+"* ]] && [[ $(uname -m) == "armv7l" ]]; then
+# If the kernel release contains
+if [[ $(uname -r) == *"v7l+"* ]] && [[ $(uname -m) == "armv7l" ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
 
@@ -20,5 +21,7 @@ mysql -u root<<EOF
 	CREATE DATABASE IF NOT EXISTS weatherJB;
 	USE weatherJB;
 EOF
+
+
 
 mysql -u root -e "SHOW DATABASES;"
