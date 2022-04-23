@@ -16,4 +16,4 @@ mysql -u root<<EOF
 	USE weatherJB;
 EOF
 
-$(mysql -u root -e "CREATE DATABASE TESTS; SHOW DATABASES;")
+mysql -u root -e "SHOW DATABASES;"
