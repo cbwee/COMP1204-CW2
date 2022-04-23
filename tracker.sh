@@ -14,7 +14,7 @@ login_MySQL="mysql -u root"
 if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
-echo 'Login MySQL: $login_MySQL'
+echo "Login MySQL: $login_MySQL"
 
 $login_MySQL<<EOF
 	CREATE DATABASE IF NOT EXISTS weatherJB;
