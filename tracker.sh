@@ -37,8 +37,6 @@ if [ $is_raspi = true ] ; then
 	DELIMITER //\	
 	IF NOT EXISTS (select * from cpuTemp) THEN\
 	SELECT 'Table is empty';\
-	END IF\
-	DELIMETER;\
 	"
 fi
 
