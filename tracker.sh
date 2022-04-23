@@ -3,8 +3,7 @@
 # Check if this computer is a Raspberry Pi
 is_raspi=false
 if [[ $(uname -r) == *"v7l+"* ]] && [[ $(uname -m) == "armv7l" ]]; then
-	is_raspi= true;
-	echo "test"
+	is_raspi=true;
 fi
 
 echo "Is Raspberry Pi: $is_raspi"
