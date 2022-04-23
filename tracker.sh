@@ -1,6 +1,14 @@
 #!/bin/bash
 
+# Check if this computer is a Raspberry Pi
+is_raspi=false
 
+"$STR" == *"$SUB"* ]
+if [(uname -r) == *"v7l+"*] && [(uname -m) == "armv7l"]; then
+	is_raspi= true;
+fi
+
+echo "Is Raspberry Pi: $is_raspi"
 
 : '
 CPU_temp_raw=$(cat /sys/class/thermal/thermal_zone0/temp)
@@ -12,7 +20,6 @@ echo "CPU Temperature: $CPU_temp_c °C"
 #/opt/lampp/bin/mysql -u root
 mysql -u root<<EOF
 	CREATE DATABASE IF NOT EXISTS weatherJB;
-	SHOW DATABASES;
 	USE weatherJB;
 EOF
 
