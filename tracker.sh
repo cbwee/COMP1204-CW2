@@ -33,8 +33,7 @@ if [ $is_raspi = true ] ; then
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
-	
-	# Reset auto increment if the table is empty
+
 	IF NOT EXISTS (select * from cpuTemp) THEN\
 	ALTER TABLE cpuTemp AUTO_INCREMENT = 1;\
 	END IF;\
