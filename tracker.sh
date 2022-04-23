@@ -37,10 +37,9 @@ if [ $is_raspi = true ] ; then
 	DELIMITER //
 	
 	IF NOT EXISTS (select * from cpuTemp) THEN\
-	SELECT 'Table is empty';\
+	ALTER TABLE cpuTemp AUTO_INCREMENT = 1;\
 	END IF;\
 	"
-
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
