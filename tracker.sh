@@ -26,8 +26,8 @@ if [ $is_raspi = true ] ; then
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	echo "CPU Temperature: $CPU_temp_c °C"
 	
-	echo "CREATE DATABASE IF NOT EXISTS cpuTemp;\
-	USE cpuTemp;" | $login_MySQL -e
+	$login_MySQL -e echo "CREATE DATABASE IF NOT EXISTS cpuTemp;\
+	USE cpuTemp;"
 
 fi
 
