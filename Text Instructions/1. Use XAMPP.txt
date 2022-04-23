@@ -2,8 +2,7 @@ Download XAMPP for Linux:
 https://www.apachefriends.org/download.html
 
 Run the installer:
-chmod 755 xampp-linux-*-installer.run
-sudo ./xampp-linux-*-installer.run
+chmod 755 xampp-linux-*-installer.run && sudo ./xampp-linux-*-installer.run
 
 Restart the server:
 sudo /opt/lampp/lampp start
