@@ -35,7 +35,7 @@ if [ $is_raspi = true ] ; then
 	);\
 	
 	IF NOT EXISTS (select * from cpuTemp)\
-	SELECT 'Table is empty'\
+	SELECT 'Table is empty';\
 	"
 fi
 
