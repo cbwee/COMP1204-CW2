@@ -15,7 +15,7 @@ if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
 
-login_MySQL<<EOF
+$login_MySQL<<EOF
 	CREATE DATABASE IF NOT EXISTS weatherJB;
 	USE weatherJB;
 EOF
