@@ -34,7 +34,10 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	
-	IF NOT EXISTS (SELECT * FROM cpuTemp) THEN SELECT '>';
+	IF NOT EXISTS(select * from cpuTemp);\
+	BEGIN\
+  		SELECT "Test";\
+	END;\
 	"
 fi
 
