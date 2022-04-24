@@ -74,7 +74,7 @@ echo "Temperature: $current_temp $unit_temp"
 current_realFeel=$(echo "$page" | grep '<div class="real-feel">' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
 echo "RealFeel: $current_realFeel $unit_temp"
 
-current_phrase=$(echo "$realFeels" | sed -n 1p)
+current_phrase=$(echo "$phrases" | sed -n 1p)
 echo "Phrase: $current_phrase"
 
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
@@ -102,7 +102,7 @@ echo "Temperature: $today_temp $unit_temp"
 today_realFeel=$(echo "$realFeels" | sed -n 1p)
 echo "RealFeel: $today_realFeel $unit_temp"
 
-today_phrase=$(echo "$realFeels" | sed -n 2p)
+today_phrase=$(echo "$phrases" | sed -n 2p)
 echo "Phrase: $today_phrase"
 
 # Tonight Data
@@ -117,7 +117,7 @@ echo "Temperature: $tonight_temp $unit_temp"
 tonight_realFeel=$(echo "$realFeels" | sed -n 2p)
 echo "RealFeel: $tonight_realFeel $unit_temp"
 
-tonight_phrase=$(echo "$realFeels" | sed -n 3p)
+tonight_phrase=$(echo "$phrases" | sed -n 3p)
 echo "Phrase: $tonight_phrase"
 
 # Tomorrow Data
@@ -132,7 +132,7 @@ echo "Temperature: $tomorrow_temp $unit_temp"
 tomorrow_realFeel=$(echo "$realFeels" | sed -n 3p)
 echo "RealFeel: $tomorrow_realFeel $unit_temp"
 
-tomorrow_phrase=$(echo "$realFeels" | sed -n 4p)
+tomorrow_phrase=$(echo "$phrases" | sed -n 4p)
 echo "Phrase: $tomorrow_phrase"
 
 login_MySQL="mysql -u root"
