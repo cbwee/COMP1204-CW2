@@ -81,8 +81,10 @@ echo "Phrase: $current_phrase"
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
 
-current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
-echo "RealFeel Shade: $current_realFeelShade $unit_temp"
+# Removed day of week because it came "Today" during testing
+# Removed realFeelShade because this data is not available at night
+#current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
+#echo "RealFeel Shade: $current_realFeelShade $unit_temp"
 
 current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
 current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
@@ -166,7 +168,6 @@ $login_MySQL -e "USE $db_name;\
 	RealFeel int NOT NULL,\
 	Phrase CHAR(100) NOT NULL,\
 	Time CHAR(50) NOT NULL,\
-	RealFeelShade int NOT NULL,\
 	AQI int NOT NULL,\
 	AirQuality CHAR(50) NOT NULL,\
     	DateTime DateTime NOT NULL,\
@@ -204,24 +205,19 @@ for table_name in ${tableArr[@]}; do
   reset_auto_increment_if_empty $db_name $table_name
 done
 
-echo "$current_realFeelShade"
-
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
 		echo "Start inserting data"
 				
 		# Insert current weather
 		
-		#INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) 
-		#VALUES("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());
-		
-		echo "VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_realFeelShade, $current_aqi, \"$current_air_quality\", NOW());"
+		echo "VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());"
 		
 		$login_MySQL -e "\
 		USE $db_name;\
 		SELECT * FROM ${tableArr[0]};\
-		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) \
-		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_realFeelShade, $current_aqi, \"$current_air_quality\", NOW());"
+		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, DateTime) \
+		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());"
 	
 	fi
 elif ["$unit_temp" = "F" ]; then
