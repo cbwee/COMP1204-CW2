@@ -88,6 +88,14 @@ current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xa
 current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Air Quality: $current_aqi, $current_air_quality"
 
+wind_and_gusts=$(echo "$page" | grep '<span class="value">' | cut  -d ">" -f 2 | cut -d "<" -f 1)
+
+current_wind=$(echo "$wind_and_gusts" | head -n 1)
+echo "Wind: $current_wind"
+
+current_wind_gusts=$(echo "$wind_and_gusts" | tail -n 1)
+echo "Wind Gusts: $current_wind_gusts"
+
 # Removed Today Data and Tonight Data, because at night today data is not available
 
 # Tomorrow Data
@@ -140,6 +148,8 @@ $login_MySQL -e "USE $db_name;\
 	Time CHAR(50) NOT NULL,\
 	AQI int NOT NULL,\
 	AirQuality CHAR(50) NOT NULL,\
+	Wind CHAR(50) NOT NULL,\
+	WindGusts CHAR(50) NOT NULL,\
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
@@ -172,8 +182,9 @@ if [ "$unit_temp" = "C" ]; then
 		$login_MySQL -e "\
 		USE $db_name;\
 		SELECT * FROM ${tableArr[0]};\
-		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, DateTime) \
-		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());
+		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
+		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
+		\"$current_air_quality\", current_wind, current_wind_gusts, NOW());
 		"
 		
 		echo "Data inserted"	
