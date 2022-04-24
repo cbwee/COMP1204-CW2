@@ -217,8 +217,10 @@ if [ "$unit_temp" = "C" ]; then
 		USE $db_name;\
 		SELECT * FROM ${tableArr[0]};\
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, DateTime) \
-		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());"
-	
+		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());
+		"
+		
+		echo "Data inserted"	
 	fi
 elif ["$unit_temp" = "F" ]; then
 	echo "Currently this script does not support imperial units"
