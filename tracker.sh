@@ -34,7 +34,7 @@ reset_auto_increment_if_empty() {
 		echo "Table $2 is empty"
 		rai_initial_count=1
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
-		echo "Auto increment value is reset to $rai_initial_count"
+		echo "Auto increment value of $2 is reset to $rai_initial_count"
 	else
 		echo "Table $2 has data"
 	fi
@@ -159,6 +159,7 @@ tableArr=("current" "today_high_low" "tomorrow" )
 
 $login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
 	USE $db_name;\
+	
 	# Current weather
 	CREATE TABLE IF NOT EXISTS ${tableArr[0]}(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
@@ -173,7 +174,37 @@ $login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
+	
+	# Today High and Low weather
+	CREATE TABLE IF NOT EXISTS ${tableArr[1]}(\
+   	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
+	Date CHAR(10) NOT NULL,\
+	Temp_high int NOT NULL,\
+	RealFeel_high int NOT NULL,\
+	Phrase_high CHAR(100) NOT NULL,\
+    	Temp_low int NOT NULL,\
+	RealFeel_low int NOT NULL,\
+	Phrase_low CHAR(100) NOT NULL,\
+    	DateTime DateTime NOT NULL,\
+    	PRIMARY KEY (ID)\
+	);\
+	
+	# Tomorrow weather
+	CREATE TABLE IF NOT EXISTS ${tableArr[1]}(\
+   	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
+	Date CHAR(10) NOT NULL,\
+    	Temp_high int NOT NULL,\
+	Temp_low int NOT NULL,\
+	RealFeel int NOT NULL,\
+	Phrase CHAR(100) NOT NULL,\
+    	DateTime DateTime NOT NULL,\
+    	PRIMARY KEY (ID)\
+	);\
 	"
+	
+for table_name in ${tableArr[@]}; do
+  reset_auto_increment_if_empty db_name $table_name
+done
 
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
