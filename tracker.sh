@@ -89,7 +89,7 @@ echo "Air Quality: $current_aqi, $current_air_quality"
 
 # Today Data
 echo
-echo "=====Today====="
+echo "=====Today(High)====="
 today_date=$(echo "$dates" | head -n 1)
 echo "Date: $today_date"
 
@@ -104,7 +104,7 @@ echo "Phrase: $today_phrase"
 
 # Tonight Data
 echo
-echo "=====Tonight====="
+echo "=====Tonight(Low)====="
 tonight_date=$(echo "$dates" | sed -n 2p)
 echo "Date: $tonight_date"
 
@@ -123,8 +123,11 @@ echo "=====Tomorrow====="
 tomorrow_date=$(echo "$dates" | tail -n 1)
 echo "Date: $tomorrow_date"
 
-tomorrow_temp=$(echo "$temperatures" | tail -n 1)
-echo "Temperature: $tomorrow_temp $unit_temp"
+tomorrow_temp_high=$(echo "$temperatures" | tail -n 1)
+echo "Temperature High: $tomorrow_temp_high $unit_temp"
+
+tomorrow_temp_low=$(echo "$page" | grep 'class="after-temp">/' | cut -d " " -f 4 | cut -d "&" -f 1)
+echo "Temperature Low: $tomorrow_temp_low $unit_temp"
 
 tomorrow_realFeel=$(echo "$realFeels" | sed -n 3p)
 echo "RealFeel: $tomorrow_realFeel $unit_temp"
