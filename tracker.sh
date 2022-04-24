@@ -6,6 +6,9 @@ if [ "$1" == "-a" ]; then
   append_data=true;
 fi
 echo "Append Data: $append_data"
+if !append_data ; then
+	echo "(Use the -a flag if you want to append to the file)"
+fi
 
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
