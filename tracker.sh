@@ -174,18 +174,19 @@ done
 
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
-		echo "Start inserting data"
-				
-		# Insert current weather
-		
+		echo "Start inserting data"		
 		$login_MySQL -e "\
 		USE $db_name;\
+		
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
 		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
 		(SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
-		"
 		
+		INSERT INTO ${tableArr[1]}(Date, Temp_high, Temp_low, RealFeel, Phrase, DateTime) \
+		VALUES(\"$tomorrow_date\", $tomorrow_temp_high, $tomorrow_temp_low, $tomorrow_realFeel, \"$tomorrow_phrase\", NOW());
+		(SELECT * FROM ${tableArr[1]} ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
+		"
 		echo "Data inserted"	
 	fi
 elif ["$unit_temp" = "F" ]; then
