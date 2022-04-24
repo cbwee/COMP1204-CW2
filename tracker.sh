@@ -18,10 +18,10 @@ reset_auto_increment_if_empty() {
 	rai_count=$($login_MySQL -e "USE $1; select COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
 		echo "Table $2 is empty"
+		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = 1;"
 	else
 		echo "Table $2 is not empty"
 	fi
-	echo -e "$rai_count"
 }
 
 # <<<<< Start finding data >>>>>
