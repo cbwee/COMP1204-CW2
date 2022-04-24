@@ -208,12 +208,17 @@ if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
 		echo "Start inserting data"
 				
-		# Insert current weather		
-		$login_MySQL<< EOF
-		USE $db_name;
-		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) 
-		VALUES("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());
-		EOF
+		# Insert current weather
+		
+		#INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) 
+		#VALUES("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());
+		
+		$login_MySQL -e "\
+		USE $db_name;\
+		SHOW TABLES;\
+		#INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
+		#echo "CPU Temperature inserted."
+	
 	fi
 elif ["$unit_temp" = "F" ]; then
 	echo "Currently this script does not support imperial units"
