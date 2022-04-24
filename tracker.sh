@@ -52,19 +52,26 @@ temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut 
 
 # Find the date values
 dates=$(echo "$page" | grep '<span class="sub-title">' | cut -d ">" -f 2 | cut -d "<" -f 1)
-echo -e "\nDates:\n${dates}\n"
+# echo -e "\nDates:\n${dates}\n"
+
+# Find the RealFeel values
+realFeels=$(echo "$page" | grep '<div class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
+echo -e "\nRealFeels:\n${realFeels}\n"
+
 
 # Current Data
 echo
 echo "=====Current====="
+current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo "Date: $current_date"
+
 current_temp=$(echo "$temperatures" | head -n 1)
 echo "Temperature: $current_temp $unit_temp"
 
+current_realFeel=$(echo "$page" | grep '<div class="real-feel">' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
+
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
-
-current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
-echo "Date: $current_date"
 
 day_of_week=$(echo "$page" | grep '<p class="day-of-week">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Day of week: $day_of_week"
@@ -79,29 +86,32 @@ echo "Air Quality: $current_aqi, $current_air_quality"
 # Today Data
 echo
 echo "=====Today====="
+today_date=$(echo "$dates" | head -n 1)
+echo "Date: $today_date"
+
 today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
-today_date=$(echo "$dates" | head -n 1)
-echo "Date: $today_date"
 
 # Tonight Data
 echo
 echo "=====Tonight====="
+tonight_date=$(echo "$dates" | sed -n 2p)
+echo "Date: $tonight_date"
+
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
-tonight_date=$(echo "$dates" | sed -n 2p)
-echo "Date: $tonight_date"
+
 
 # Tomorrow Data
 echo
 echo "=====Tomorrow====="
-tomorrow_temp=$(echo "$temperatures" | tail -n 1)
-echo "Temperature: $tomorrow_temp $unit_temp"
-
 tomorrow_date=$(echo "$dates" | tail -n 1)
 echo "Date: $tomorrow_date"
+
+tomorrow_temp=$(echo "$temperatures" | tail -n 1)
+echo "Temperature: $tomorrow_temp $unit_temp"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
