@@ -5,17 +5,16 @@ address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/2
 page=$(curl -A "$user_agent" $address)
 echo
 
-# Find the temperature values
-temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-echo -e "Temperatures:\n${temperatures}"
 
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
 if [[ $(uname -r) == @(*"v8+"*|*"v7l+"*) ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
-
 echo "Is Raspberry Pi: $is_raspi"
+# Find the temperature values
+temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
+echo -e "Temperatures:\n${temperatures}\n"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
