@@ -102,7 +102,7 @@ if [ $is_raspi = true ] ; then
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
 	
 	if [ $append_data == true ]; then
-		:'
+		: '
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
