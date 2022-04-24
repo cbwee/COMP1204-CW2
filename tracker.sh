@@ -204,6 +204,8 @@ for table_name in ${tableArr[@]}; do
   reset_auto_increment_if_empty $db_name $table_name
 done
 
+echo "$current_realFeelShade"
+
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
 		echo "Start inserting data"
