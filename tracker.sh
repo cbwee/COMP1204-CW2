@@ -5,7 +5,8 @@ address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/2
 page=$(curl -A "$user_agent" $address)
 echo
 
-temperatures=$(echo $page | grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
+# Find the temperature values
+temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
 echo $temeratures
 
 is_raspi=false
