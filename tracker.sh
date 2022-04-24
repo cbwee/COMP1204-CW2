@@ -21,7 +21,7 @@ reset_auto_increment_if_empty() {
 	else
 		echo "Table $2 is not empty"
 	fi
-	#echo "$rai_count"
+	echo -e "$rai_count"
 }
 
 # <<<<< Start finding data >>>>>
