@@ -153,6 +153,8 @@ if ["$unit_temp" = "C"]; then
 	echo "Start inserting data"
 elif ["$unit_temp" = "F"]; then
 	echo "Currently this script does not support imperial units"
+else
+	echo "Error, unknown unit"
 fi
 
 if [ $is_raspi = true ]; then
