@@ -14,7 +14,7 @@ fi
 echo "Is Raspberry Pi: $is_raspi"
 # Find the temperature values
 temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-echo -e "Temperatures:\n${temperatures}\n"
+echo -e "\nTemperatures:\n${temperatures}\n"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
