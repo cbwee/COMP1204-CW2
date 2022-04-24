@@ -152,7 +152,7 @@ EOF
 tableArr=("current" "today_high_low" "tomorrow" )
 
 if [ "$unit_temp" = "C" ]; then
-	if [ $append_data == true ] then;
+	if [ $append_data == true ]; then
 		echo "Start inserting data"
 	fi
 elif ["$unit_temp" = "F" ]; then
