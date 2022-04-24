@@ -58,6 +58,9 @@ dates=$(echo "$page" | grep '<span class="sub-title">' | cut -d ">" -f 2 | cut -
 realFeels=$(echo "$page" | grep '<div class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
 # echo -e "\nRealFeels:\n${realFeels}\n"
 
+# Find the phrase values
+phrases=$(echo "$page" | grep '<div class="phrase">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo -e "\nPhrases:\n${phrases}\n"
 
 # Current Data
 echo
