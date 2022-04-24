@@ -31,12 +31,12 @@ reset_auto_increment_if_empty() {
 	# echo -e "Database: $1\nTable: $2"
 	rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
-		# echo "Table $2 is empty"
+		echo "Table $2 is empty"
 		rai_initial_count=1
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
 		echo "Auto increment value of $2 is reset to $rai_initial_count"
 	else
-		echo "Table $2 has data"
+		echo "Table $2 has $rai_count rows of data"
 	fi
 	echo
 }
@@ -121,7 +121,7 @@ login_MySQL="mysql -u root"
 if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
-echo -e "\nLogin MySQL: $login_MySQL\n"
+echo -e "\nCommand for MySQL login: $login_MySQL\n"
 
 # <<<<< Create Database and Tables >>>>>
 # An array of table names
