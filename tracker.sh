@@ -72,7 +72,7 @@ if [ $is_raspi = true ] ; then
     	PRIMARY KEY (ID)\
 	);\
 	"
-	$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
+	#$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
 	
 	#Reset auto increment if table is empty
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
@@ -83,4 +83,3 @@ if [ $is_raspi = true ] ; then
 	'
 fi
 
-$login_MySQL -e "SHOW DATABASES;"
