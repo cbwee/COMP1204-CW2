@@ -50,7 +50,7 @@ if [ $is_raspi = true ] ; then
 	
 	$login_MySQL -e "\
 	USE cputemp;\
-	INSERT INTO cpuTemp(Temperature_C, DateTime) VALUES($CPU_temp_c, NOW());\
+	INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
 	"
 fi
 
