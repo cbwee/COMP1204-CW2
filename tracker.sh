@@ -105,6 +105,7 @@ if [ $is_raspi = true ] ; then
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
+		echo "CPU Temperature inserted."
 	fi
 fi
 
