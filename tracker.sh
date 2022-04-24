@@ -46,6 +46,8 @@ if [ $is_raspi = true ] ; then
 	#IF NOT EXISTS(SELECT * FROM cpuTemp) THEN\
       	#SELECT 'TEST';\	
 	"
+	$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
+	
 	#// plan to add reset auto increment if table is empty
 	
 	$login_MySQL -e "\
