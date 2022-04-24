@@ -179,10 +179,10 @@ if [ "$unit_temp" = "C" ]; then
 		
 		$login_MySQL -e "\
 		USE $db_name;\
-		SELECT * FROM ${tableArr[0]};\
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
 		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
+		SELECT * FROM ${tableArr[0]};\
 		"
 		
 		echo "Data inserted"	
@@ -217,6 +217,6 @@ if [ $is_raspi = true ]; then
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
-		echo "CPU Temperature inserted."
+		echo "CPU Temperature inserted"
 	fi
 fi
