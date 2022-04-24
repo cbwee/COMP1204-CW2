@@ -59,11 +59,11 @@ if [ $is_raspi = true ] ; then
 	
 	#Reset auto increment if table is empty
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
-	
-	#$login_MySQL -e "\
+	:'
+	$login_MySQL -e "\
 	USE cputemp;\
-	INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
-	"
+	INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
+	'
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
