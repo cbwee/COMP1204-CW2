@@ -216,8 +216,9 @@ if [ $is_raspi = true ]; then
 	if [ $append_data == true ]; then
 		$login_MySQL -e "\
 		USE cputemp;\
-		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
+		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
 		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT 10) ORDER BY ID;\
+		"
 		echo "CPU Temperature inserted"
 	fi
 fi
