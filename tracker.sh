@@ -56,10 +56,10 @@ if [ $is_raspi = true ] ; then
 	"
 	$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
 	
-	#// plan to add reset auto increment if table is empty
+	#Reset auto increment if table is empty
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
 	
-	$login_MySQL -e "\
+	#$login_MySQL -e "\
 	USE cputemp;\
 	INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
 	"
