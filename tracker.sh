@@ -149,9 +149,9 @@ EOF
 
 # Create Tables
 
-if ["$unit_temp" = "C"]; then
+if [["$unit_temp" == "C"]]; then
 	echo "Start inserting data"
-elif ["$unit_temp" = "F"]; then
+elif [["$unit_temp" == "F"]]; then
 	echo "Currently this script does not support imperial units"
 else
 	echo "Error, unknown unit"
