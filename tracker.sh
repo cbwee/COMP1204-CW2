@@ -56,7 +56,7 @@ dates=$(echo "$page" | grep '<span class="sub-title">' | cut -d ">" -f 2 | cut -
 
 # Find the RealFeel values
 realFeels=$(echo "$page" | grep '<div class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
-echo -e "\nRealFeels:\n${realFeels}\n"
+# echo -e "\nRealFeels:\n${realFeels}\n"
 
 
 # Current Data
@@ -69,6 +69,7 @@ current_temp=$(echo "$temperatures" | head -n 1)
 echo "Temperature: $current_temp $unit_temp"
 
 current_realFeel=$(echo "$page" | grep '<div class="real-feel">' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
+echo "RealFeel: $current_realFeel"
 
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
@@ -92,6 +93,8 @@ echo "Date: $today_date"
 today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
+today_realFeel=$(echo "$realfeels" | sed -n 1p)
+echo "RealFeel: $today_realFeel"
 
 # Tonight Data
 echo
@@ -102,7 +105,8 @@ echo "Date: $tonight_date"
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
-
+tonight_realFeel=$(echo "$realfeels" | sed -n 2p)
+echo "RealFeel: $tonight_realFeel"
 
 # Tomorrow Data
 echo
@@ -112,6 +116,9 @@ echo "Date: $tomorrow_date"
 
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
 echo "Temperature: $tomorrow_temp $unit_temp"
+
+tomorrow_realFeel=$(echo "$realfeels" | sed -n 3p)
+echo "RealFeel: $tomorrow_realFeel"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
