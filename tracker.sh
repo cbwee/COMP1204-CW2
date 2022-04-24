@@ -5,13 +5,20 @@ address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/2
 page=$(curl -A "$user_agent" $address)
 echo
 
-
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
 if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
 echo "Is Raspberry Pi: $is_raspi"
+
+# Bash functions for MySQL
+reset_auto_increment_if_empty() {
+	echo -e"Database: $1\nTable: $2"
+}
+
+# <<<<< Start finding data >>>>>
+
 # Find the temperature values
 temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
 echo -e "\nTemperatures:\n${temperatures}\n"
@@ -49,6 +56,7 @@ if [ $is_raspi = true ] ; then
 	$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
 	
 	#// plan to add reset auto increment if table is empty
+	reset_auto_increment_if_empty "cputemp" "cpuTemp"
 	
 	$login_MySQL -e "\
 	USE cputemp;\
