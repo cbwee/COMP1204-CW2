@@ -196,6 +196,7 @@ fi
 
 if [ $is_raspi = true ]; then
 	CPU_temp_raw=$(cat /sys/class/thermal/thermal_zone0/temp)
+	# CPU temperature in degree Celsius
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	# Use echo -e to display \n as a line break
 	echo -e "\nCPU Temperature: $CPU_temp_c °C\n"
