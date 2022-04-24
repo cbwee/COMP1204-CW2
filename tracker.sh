@@ -16,7 +16,7 @@ echo "Is Raspberry Pi: $is_raspi"
 reset_auto_increment_if_empty() {
 	echo -e "Database: $1\nTable: $2"
 	rai_count="$($login_MySQL -e "USE $1; select COUNT(*) from $2;")"
-	if (( echo "$rai_count" == 0 )); then
+	if (true); then
 		echo "Table $2 is empty"
 	else
 		echo "Table $2 is not empty"
