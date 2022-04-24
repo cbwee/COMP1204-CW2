@@ -6,7 +6,7 @@ if [ "$1" == "-a" ]; then
   append_data=true;
 fi
 echo "Append Data: $append_data"
-if !append_data ; then
+if [ $append_data == false ]; then
 	echo "(Use the -a flag if you want to append to the file)"
 fi
 
