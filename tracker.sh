@@ -29,7 +29,7 @@ echo "Raspberry Pi: $is_raspi"
 reset_auto_increment_if_empty() {
 	echo
 	# echo -e "Database: $1\nTable: $2"
-	rai_count=$($login_MySQL -e "USE $1; select COUNT(*) from $2;" | tail -n 1)
+	rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
 		# echo "Table $2 is empty"
 		rai_initial_count=1
@@ -182,7 +182,7 @@ if [ "$unit_temp" = "C" ]; then
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
 		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
-		SELECT * FROM ${tableArr[0]};\
+		(SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT 10) ORDER BY ID;\
 		"
 		
 		echo "Data inserted"	
@@ -217,6 +217,7 @@ if [ $is_raspi = true ]; then
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
+		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT 10) ORDER BY ID;\
 		echo "CPU Temperature inserted"
 	fi
 fi
