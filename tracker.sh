@@ -152,7 +152,7 @@ EOF
 tableArr=("current" "today_high_low" "tomorrow" )
 
 for name in ${tableArr[@]}; do
-  echo $name
+  echo "$name"
 done
 
 
