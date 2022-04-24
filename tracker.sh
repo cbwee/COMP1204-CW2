@@ -28,7 +28,6 @@ echo "Raspberry Pi: $is_raspi"
 
 # Bash function for MySQL
 reset_auto_increment_if_empty() {
-	echo
 	# echo -e "Database: $1\nTable: $2"
 	rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
@@ -199,7 +198,7 @@ if [ $is_raspi = true ]; then
 	CPU_temp_raw=$(cat /sys/class/thermal/thermal_zone0/temp)
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	# Use echo -e to display \n as a line break
-	echo -e "\nCPU Temperature: $CPU_temp_c °C"
+	echo -e "\nCPU Temperature: $CPU_temp_c °C\n"
 	
 	$login_MySQL -e "CREATE DATABASE IF NOT EXISTS cputemp;\
 	USE cputemp;\
