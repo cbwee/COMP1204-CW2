@@ -152,17 +152,10 @@ EOF
 # An array of table names
 tableArr=("current" "today_high_low" "tomorrow" )
 
-: '
-for name in ${tableArr[@]}; do
-  echo "$name"
-done
-'
+#for name in ${tableArr[@]}; do
+#  echo "$name"
+#done
 
-: '
-for i in "${!tableArr[@]}"; do
-  printf '${tableArr[%s]}=%s\n' "$i" "${tableArr[i]}"
-done
-'
 
 $login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
 	USE $db_name;\
