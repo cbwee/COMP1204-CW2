@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo
 # Command line flag
 append_data=false
 if [ "$1" == "-a" ]; then
@@ -7,7 +8,7 @@ if [ "$1" == "-a" ]; then
 fi
 echo "Append Data: $append_data"
 if [ $append_data == false ]; then
-	echo "(Use the -a flag if you want to append to the file)"
+	echo -e "\n(Use the -a flag if you want to append to the file)\n"
 fi
 
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
