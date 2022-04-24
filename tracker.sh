@@ -47,15 +47,15 @@ echo -e "\n$page_title"
 unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
 
 # Find the temperature values
-temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
+temperatures=$(echo "$page" | grep 'class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
 # echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Find the date values
-dates=$(echo "$page" | grep '<span class="sub-title">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+dates=$(echo "$page" | grep 'class="sub-title">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 # echo -e "\nDates:\n${dates}\n"
 
 # Find the RealFeel values
-realFeels=$(echo "$page" | grep '<div class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
+realFeels=$(echo "$page" | grep 'class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
 # echo -e "\nRealFeels:\n${realFeels}\n"
 
 # Find the phrase values
