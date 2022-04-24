@@ -14,6 +14,7 @@ echo "Is Raspberry Pi: $is_raspi"
 
 # Bash functions for MySQL
 reset_auto_increment_if_empty() {
+	echo
 	echo -e "Database: $1\nTable: $2"
 	rai_count=$($login_MySQL -e "USE $1; select COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
@@ -24,6 +25,7 @@ reset_auto_increment_if_empty() {
 	else
 		echo "Table $2 is not empty"
 	fi
+	echo
 }
 
 # <<<<< Start finding data >>>>>
