@@ -13,7 +13,7 @@ fi
 
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
-page=$(curl -A "$user_agent" $address)
+page=$(curl --silent -A "$user_agent" $address)
 echo
 
 is_raspi=false
