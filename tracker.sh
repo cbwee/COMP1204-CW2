@@ -93,7 +93,7 @@ echo "Date: $today_date"
 today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
-today_realFeel=$(echo "$realfeels" | sed -n 1p)
+today_realFeel=$(echo "$realFeels" | sed -n 1p)
 echo "RealFeel: $today_realFeel"
 
 # Tonight Data
@@ -105,7 +105,7 @@ echo "Date: $tonight_date"
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
-tonight_realFeel=$(echo "$realfeels" | sed -n 2p)
+tonight_realFeel=$(echo "$realFeels" | sed -n 2p)
 echo "RealFeel: $tonight_realFeel"
 
 # Tomorrow Data
@@ -117,7 +117,7 @@ echo "Date: $tomorrow_date"
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
 echo "Temperature: $tomorrow_temp $unit_temp"
 
-tomorrow_realFeel=$(echo "$realfeels" | sed -n 3p)
+tomorrow_realFeel=$(echo "$realFeels" | sed -n 3p)
 echo "RealFeel: $tomorrow_realFeel"
 
 login_MySQL="mysql -u root"
