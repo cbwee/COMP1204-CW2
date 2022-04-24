@@ -16,6 +16,7 @@ user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 page=$(curl --silent -A "$user_agent" $address)
 db_name="weather_jb"
+num_display_after_insert=5;
 echo
 
 is_raspi=false
@@ -182,7 +183,7 @@ if [ "$unit_temp" = "C" ]; then
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
 		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
-		(SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT 10) ORDER BY ID;\
+		(SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
 		"
 		
 		echo "Data inserted"	
@@ -217,7 +218,7 @@ if [ $is_raspi = true ]; then
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
-		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT 10) ORDER BY ID;\
+		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
 		"
 		echo "CPU Temperature inserted"
 	fi
