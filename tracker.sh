@@ -199,7 +199,7 @@ if [ $is_raspi = true ]; then
 	# CPU temperature in degree Celsius
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	# Use echo -e to display \n as a line break
-	echo -e "\nCPU Temperature: $CPU_temp_c °C\n"
+	echo -e "CPU Temperature: $CPU_temp_c °C\n"
 	
 	$login_MySQL -e "CREATE DATABASE IF NOT EXISTS cputemp;\
 	USE cputemp;\
