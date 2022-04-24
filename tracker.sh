@@ -83,42 +83,12 @@ echo "Time: $current_time"
 
 # Removed day of week because it came "Today" during testing
 # Removed realFeelShade because this data is not available at night
-#current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
-#echo "RealFeel Shade: $current_realFeelShade $unit_temp"
 
 current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
 current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Air Quality: $current_aqi, $current_air_quality"
 
-# Today Data
-echo
-echo "=====Today(High)====="
-today_date=$(echo "$dates" | head -n 1)
-echo "Date: $today_date"
-
-today_temp=$(echo "$temperatures" | sed -n 2p)
-echo "Temperature: $today_temp $unit_temp"
-
-today_realFeel=$(echo "$realFeels" | sed -n 1p)
-echo "RealFeel: $today_realFeel $unit_temp"
-
-today_phrase=$(echo "$phrases" | sed -n 2p)
-echo "Phrase: $today_phrase"
-
-# Tonight Data
-echo
-echo "=====Tonight(Low)====="
-tonight_date=$(echo "$dates" | sed -n 2p)
-echo "Date: $tonight_date"
-
-tonight_temp=$(echo "$temperatures" | sed -n 3p)
-echo "Temperature: $tonight_temp $unit_temp"
-
-tonight_realFeel=$(echo "$realFeels" | sed -n 2p)
-echo "RealFeel: $tonight_realFeel $unit_temp"
-
-tonight_phrase=$(echo "$phrases" | sed -n 3p)
-echo "Phrase: $tonight_phrase"
+# Removed Today Data and Tonight Data, because at night today data is not available
 
 # Tomorrow Data
 echo
@@ -147,7 +117,7 @@ echo -e "\nLogin MySQL: $login_MySQL\n"
 
 # <<<<< Create Database and Tables >>>>>
 # An array of table names
-tableArr=("current" "today_high_low" "tomorrow" )
+tableArr=("current" "tomorrow" )
 
 #for name in ${tableArr[@]}; do
 #  echo "$name"
@@ -173,23 +143,9 @@ $login_MySQL -e "USE $db_name;\
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
-	
-	# Today High and Low weather
-	CREATE TABLE IF NOT EXISTS ${tableArr[1]}(\
-   	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
-	Date CHAR(10) NOT NULL,\
-	Temp_high int NOT NULL,\
-	RealFeel_high int NOT NULL,\
-	Phrase_high CHAR(100) NOT NULL,\
-    	Temp_low int NOT NULL,\
-	RealFeel_low int NOT NULL,\
-	Phrase_low CHAR(100) NOT NULL,\
-    	DateTime DateTime NOT NULL,\
-    	PRIMARY KEY (ID)\
-	);\
-	
+		
 	# Tomorrow weather
-	CREATE TABLE IF NOT EXISTS ${tableArr[2]}(\
+	CREATE TABLE IF NOT EXISTS ${tableArr[1]}(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
 	Date CHAR(10) NOT NULL,\
     	Temp_high int NOT NULL,\
