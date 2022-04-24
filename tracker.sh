@@ -14,6 +14,7 @@ fi
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 page=$(curl --silent -A "$user_agent" $address)
+db_name="weather_jb"
 echo
 
 is_raspi=false
@@ -47,7 +48,11 @@ unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | 
 
 # Find the temperature values
 temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-#echo -e "\nTemperatures:\n${temperatures}\n"
+# echo -e "\nTemperatures:\n${temperatures}\n"
+
+# Find the date values
+dates=$(echo "$page" | grep '<span class="sub-title">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo -e "\nDates:\n${dates}\n"
 
 # Current Data
 echo
@@ -77,17 +82,26 @@ echo "=====Today====="
 today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
+today_date=$(echo "$dates" | head -n 1)
+echo "Date: $today_date"
+
 # Tonight Data
 echo
 echo "=====Tonight====="
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
+tonight_date=$(echo "$dates" | sed -n 2p)
+echo "Date: $tonight_date"
+
 # Tomorrow Data
 echo
 echo "=====Tomorrow====="
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
 echo "Temperature: $tomorrow_temp $unit_temp"
+
+tomorrow_date=$(echo "$dates" | tail -n 1)
+echo "Date: $tomorrow_date"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
@@ -97,8 +111,8 @@ fi
 echo -e "\nLogin MySQL: $login_MySQL"
 
 $login_MySQL<<EOF
-	CREATE DATABASE IF NOT EXISTS weather_jb;
-	USE weather_jb;
+	CREATE DATABASE IF NOT EXISTS $db_name;
+	USE $db_name;
 EOF
 
 if [ $is_raspi = true ] ; then
