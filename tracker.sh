@@ -141,7 +141,7 @@ login_MySQL="mysql -u root"
 if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
-echo -e "\nLogin MySQL: $login_MySQL"
+echo -e "\nLogin MySQL: $login_MySQL\n"
 
 $login_MySQL<<EOF
 	CREATE DATABASE IF NOT EXISTS $db_name;
@@ -150,6 +150,11 @@ EOF
 
 # <<<<< Create Database and Tables >>>>>
 tableArr=("current" "today_high_low" "tomorrow" )
+
+for i in ${tableArr[@]}; do
+  echo ${tableArr[$i]}
+done
+
 
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
