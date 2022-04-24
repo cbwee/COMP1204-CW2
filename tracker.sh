@@ -190,7 +190,7 @@ $login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
 	);\
 	
 	# Tomorrow weather
-	CREATE TABLE IF NOT EXISTS ${tableArr[1]}(\
+	CREATE TABLE IF NOT EXISTS ${tableArr[2]}(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
 	Date CHAR(10) NOT NULL,\
     	Temp_high int NOT NULL,\
