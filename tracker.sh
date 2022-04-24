@@ -61,6 +61,9 @@ echo "Time: $current_time"
 current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Date: $current_date"
 
+day_of_week=$(echo "$page" | grep '<p class="day-of-week">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo "Day of week: $day_of_week"
+
 current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
 echo "RealFeel Shade: $current_realFeelShade"
 
