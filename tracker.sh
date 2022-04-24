@@ -60,7 +60,7 @@ realFeels=$(echo "$page" | grep 'class="real-feel">' | tail -n 3 | cut -d " " -f
 
 # Find the phrase values
 phrases=$(echo "$page" | grep 'class="phrase">' | cut -d ">" -f 2 | cut -d "<" -f 1)
-echo -e "\nPhrases:\n${phrases}\n"
+# echo -e "\nPhrases:\n${phrases}\n"
 
 # Current Data
 echo
