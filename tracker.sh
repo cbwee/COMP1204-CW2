@@ -207,13 +207,13 @@ done
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
 		echo "Start inserting data"
-		$login_MySQL -e "USE $db_name;\
+		$login_MySQL -e 'USE $db_name;\
 		
 		# Insert current weather\
 		#INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) \
 		#VALUES ("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());\
-		"
-		echo "VALUES ("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());\"
+		'
+		echo 'VALUES ("$current_date", $current_temp, $current_realFeel, "$current_phrase", "$current_time", $current_realFeelShade, $current_aqi, "$current_air_quality", NOW());\'
 		echo "Data inserted"
 	fi
 elif ["$unit_temp" = "F" ]; then
