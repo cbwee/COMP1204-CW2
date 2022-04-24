@@ -42,7 +42,7 @@ reset_auto_increment_if_empty() {
 # <<<<< Start finding data >>>>>
 
 page_title=$(echo "$page" | grep '<title>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
-echo -e "\n$page_title\n"
+echo -e "\n$page_title"
 unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
 
 # Find the temperature values
