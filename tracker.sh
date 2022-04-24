@@ -215,7 +215,7 @@ if [ "$unit_temp" = "C" ]; then
 		
 		$login_MySQL -e "\
 		USE $db_name;\
-		SHOW TABLES;\
+		SELECT * FROM ${tableArr[0]};\
 		#INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
 		#echo "CPU Temperature inserted."
 	
