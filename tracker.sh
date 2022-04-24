@@ -61,6 +61,13 @@ echo "Time: $current_time"
 current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Date: $current_date"
 
+current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
+echo "RealFeel Shade: $current_realFeelShade"
+
+current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
+current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo "Air Quality: $current_aqi, $current_air_quality"
+
 # Today Data
 echo
 echo "=====Today====="
