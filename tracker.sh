@@ -47,6 +47,11 @@ if [ $is_raspi = true ] ; then
       	#SELECT 'TEST';\	
 	"
 	#// plan to add reset auto increment if table is empty
+	
+	$login_MySQL -e "\
+	USE cputemp;\
+	INSERT INTO cpuTemp(Temperature_C, DateTime) VALUES($CPU_temp_c, NOW());\
+	"
 fi
 
 $login_MySQL -e "SHOW DATABASES;"
