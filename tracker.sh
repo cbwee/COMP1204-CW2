@@ -36,7 +36,7 @@ reset_auto_increment_if_empty() {
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
 		echo "Auto increment value is reset to $rai_initial_count"
 	else
-		echo "Table $2 is not empty"
+		echo "Table $2 has data"
 	fi
 	echo
 }
@@ -158,11 +158,29 @@ for name in ${tableArr[@]}; do
 done
 '
 
+: '
 for i in "${!tableArr[@]}"; do
   printf '${tableArr[%s]}=%s\n' "$i" "${tableArr[i]}"
 done
+'
 
-
+$login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
+	USE $db_name;\
+	# Current weather
+	CREATE TABLE IF NOT EXISTS ${tableArr[0]}(\
+   	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
+	Date CHAR(10) NOT NULL,\
+    	Temp int NOT NULL,\
+	RealFeel int NOT NULL,\
+	Phrase CHAR(100) NOT NULL,\
+	Time CHAR(50) NOT NULL,\
+	RealFeelShade int NOT NULL,\
+	AQI int NOT NULL,\
+	AirQuality CHAR(50) NOT NULL,\
+    	DateTime DateTime NOT NULL,\
+    	PRIMARY KEY (ID)\
+	);\
+	"
 
 if [ "$unit_temp" = "C" ]; then
 	if [ $append_data == true ]; then
