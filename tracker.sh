@@ -216,8 +216,8 @@ if [ "$unit_temp" = "C" ]; then
 		$login_MySQL -e "\
 		USE $db_name;\
 		SELECT * FROM ${tableArr[0]};\
-		#INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());"
-		#echo "CPU Temperature inserted."
+		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, RealFeelShade, AQI, AirQuality, DateTime) \
+		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_realFeelShade, $current_aqi, \"$current_air_quality\", NOW());"
 	
 	fi
 elif ["$unit_temp" = "F" ]; then
