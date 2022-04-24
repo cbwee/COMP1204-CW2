@@ -25,13 +25,13 @@ if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv
 fi
 echo "Raspberry Pi: $is_raspi"
 
-# Bash functions for MySQL
+# Bash function for MySQL
 reset_auto_increment_if_empty() {
 	echo
 	# echo -e "Database: $1\nTable: $2"
 	rai_count=$($login_MySQL -e "USE $1; select COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
-		echo "Table $2 is empty"
+		# echo "Table $2 is empty"
 		rai_initial_count=1
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
 		echo "Auto increment value of $2 is reset to $rai_initial_count"
