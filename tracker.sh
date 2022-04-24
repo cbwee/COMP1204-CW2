@@ -203,7 +203,7 @@ $login_MySQL -e "CREATE DATABASE IF NOT EXISTS $db_name;\
 	"
 	
 for table_name in ${tableArr[@]}; do
-  reset_auto_increment_if_empty db_name $table_name
+  reset_auto_increment_if_empty $db_name $table_name
 done
 
 if [ "$unit_temp" = "C" ]; then
