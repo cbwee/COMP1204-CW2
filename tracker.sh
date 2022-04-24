@@ -44,7 +44,7 @@ reset_auto_increment_if_empty() {
 # <<<<< Start finding data >>>>>
 
 page_title=$(echo "$page" | grep '<title>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
-echo -e "\n$page_title"
+echo -e "\n\n$page_title"
 unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
 
 # Find the temperature values
@@ -115,6 +115,7 @@ echo "RealFeel: $tomorrow_realFeel $unit_temp"
 
 tomorrow_phrase=$(echo "$phrases" | tail -n 1)
 echo "Phrase: $tomorrow_phrase"
+echo
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
