@@ -149,11 +149,19 @@ $login_MySQL<<EOF
 EOF
 
 # <<<<< Create Database and Tables >>>>>
+# An array of table names
 tableArr=("current" "today_high_low" "tomorrow" )
 
+: '
 for name in ${tableArr[@]}; do
   echo "$name"
 done
+'
+
+for i in "${!tableArr[@]}"; do
+  printf '${tableArr[%s]}=%s\n' "$i" "${tableArr[i]}"
+done
+
 
 
 if [ "$unit_temp" = "C" ]; then
