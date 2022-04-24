@@ -151,8 +151,8 @@ EOF
 # <<<<< Create Database and Tables >>>>>
 tableArr=("current" "today_high_low" "tomorrow" )
 
-for i in ${tableArr[@]}; do
-  echo ${tableArr[$i]}
+for name in ${tableArr[@]}; do
+  echo name
 done
 
 
