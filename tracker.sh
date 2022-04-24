@@ -11,6 +11,7 @@ if [ $append_data == false ]; then
 	echo -e "(Use the -a flag if you want to append the data to MySQL database)"
 fi
 
+# Assign variables
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 page=$(curl --silent -A "$user_agent" $address)
@@ -147,10 +148,13 @@ $login_MySQL<<EOF
 	USE $db_name;
 EOF
 
-# Create Tables
+# <<<<< Create Database and Tables >>>>>
+tableArr=("current" "today_high_low" "tomorrow" )
 
 if [ "$unit_temp" = "C" ]; then
-	echo "Start inserting data"
+	if [ $append_data == true ] then;
+		echo "Start inserting data"
+	fi
 elif ["$unit_temp" = "F" ]; then
 	echo "Currently this script does not support imperial units"
 else
