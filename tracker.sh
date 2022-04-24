@@ -48,6 +48,7 @@ temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut 
 #echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Current Data
+echo
 echo "=====Current====="
 current_temp=$(echo "$temperatures" | head -n 1)
 echo "Temperature: $current_temp $unit_temp"
@@ -59,16 +60,19 @@ current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d
 echo "Date: $current_date"
 
 # Today Data
+echo
 echo "=====Today====="
 today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
 # Tonight Data
+echo
 echo "=====Tonight====="
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
 # Tomorrow Data
+echo
 echo "=====Tomorrow====="
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
 echo "Temperature: $tomorrow_temp $unit_temp"
@@ -78,7 +82,7 @@ login_MySQL="mysql -u root"
 if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
-echo "Login MySQL: $login_MySQL"
+echo -e "\nLogin MySQL: $login_MySQL"
 
 $login_MySQL<<EOF
 	CREATE DATABASE IF NOT EXISTS weather_jb;
