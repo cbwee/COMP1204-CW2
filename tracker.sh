@@ -48,26 +48,30 @@ temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut 
 #echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Current Data
+echo "=====Current====="
 current_temp=$(echo "$temperatures" | head -n 1)
-echo "Current Temperature: $current_temp $unit_temp"
+echo "Temperature: $current_temp $unit_temp"
 
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
-echo "Current Time: $current_time"
+echo "Time: $current_time"
 
 current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
-echo "Current Date: $current_date"
+echo "Date: $current_date"
 
 # Today Data
+echo "=====Today====="
 today_temp=$(echo "$temperatures" | sed -n 2p)
-echo "Today Temperature: $today_temp $unit_temp"
+echo "Temperature: $today_temp $unit_temp"
 
 # Tonight Data
+echo "=====Tonight====="
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
-echo "Tonight Temperature: $tonight_temp $unit_temp"
+echo "Temperature: $tonight_temp $unit_temp"
 
 # Tomorrow Data
+echo "=====Tomorrow====="
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
-echo "Tomorrow Temperature: $tomorrow_temp $unit_temp"
+echo "Temperature: $tomorrow_temp $unit_temp"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
