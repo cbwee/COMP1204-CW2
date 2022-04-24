@@ -52,7 +52,10 @@ current_temp=$(echo "$temperatures" | head -n 1)
 echo "Current Temperature: $current_temp $unit_temp"
 
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
-echo "Current Time: $current_time)"
+echo "Current Time: $current_time"
+
+current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+echo "Current Date: $current_date"
 
 # Today Data
 today_temp=$(echo "$temperatures" | sed -n 2p)
