@@ -69,7 +69,7 @@ current_temp=$(echo "$temperatures" | head -n 1)
 echo "Temperature: $current_temp $unit_temp"
 
 current_realFeel=$(echo "$page" | grep '<div class="real-feel">' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
-echo "RealFeel: $current_realFeel"
+echo "RealFeel: $current_realFeel $unit_temp"
 
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
@@ -78,7 +78,7 @@ day_of_week=$(echo "$page" | grep '<p class="day-of-week">' | cut -d ">" -f 2 | 
 echo "Day of week: $day_of_week"
 
 current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
-echo "RealFeel Shade: $current_realFeelShade"
+echo "RealFeel Shade: $current_realFeelShade $unit_temp"
 
 current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
 current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
@@ -94,7 +94,7 @@ today_temp=$(echo "$temperatures" | sed -n 2p)
 echo "Temperature: $today_temp $unit_temp"
 
 today_realFeel=$(echo "$realFeels" | sed -n 1p)
-echo "RealFeel: $today_realFeel"
+echo "RealFeel: $today_realFeel $unit_temp"
 
 # Tonight Data
 echo
@@ -106,7 +106,7 @@ tonight_temp=$(echo "$temperatures" | sed -n 3p)
 echo "Temperature: $tonight_temp $unit_temp"
 
 tonight_realFeel=$(echo "$realFeels" | sed -n 2p)
-echo "RealFeel: $tonight_realFeel"
+echo "RealFeel: $tonight_realFeel $unit_temp"
 
 # Tomorrow Data
 echo
@@ -118,7 +118,7 @@ tomorrow_temp=$(echo "$temperatures" | tail -n 1)
 echo "Temperature: $tomorrow_temp $unit_temp"
 
 tomorrow_realFeel=$(echo "$realFeels" | sed -n 3p)
-echo "RealFeel: $tomorrow_realFeel"
+echo "RealFeel: $tomorrow_realFeel $unit_temp"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
