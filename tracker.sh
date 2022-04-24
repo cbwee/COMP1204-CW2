@@ -22,7 +22,7 @@ is_raspi=false
 if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
-echo "Is Raspberry Pi: $is_raspi"
+echo "Raspberry Pi: $is_raspi"
 
 # Bash functions for MySQL
 reset_auto_increment_if_empty() {
