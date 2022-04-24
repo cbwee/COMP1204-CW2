@@ -65,7 +65,7 @@ phrases=$(echo "$page" | grep 'class="phrase">' | cut -d ">" -f 2 | cut -d "<" -
 
 # Current Data
 echo
-echo "=====Current====="
+echo "===== Current ====="
 current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Date: $current_date"
 
@@ -100,7 +100,7 @@ echo "Wind Gusts: $current_wind_gusts"
 
 # Tomorrow Data
 echo
-echo "=====Tomorrow====="
+echo "===== Tomorrow ====="
 tomorrow_date=$(echo "$dates" | tail -n 1)
 echo "Date: $tomorrow_date"
 
