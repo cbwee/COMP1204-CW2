@@ -7,7 +7,7 @@ echo
 
 # Find the temperature values
 temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-echo $temeratures
+echo -e "Temperatures:\n${temperatures}"
 
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
