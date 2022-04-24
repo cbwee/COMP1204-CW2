@@ -41,25 +41,27 @@ reset_auto_increment_if_empty() {
 
 # <<<<< Start finding data >>>>>
 
+unit_temp=$(echo "$page"| grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
+
 # Find the temperature values
 temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
-echo -e "\nTemperatures:\n${temperatures}\n"
+#echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Current Data
 current_temp=$(echo "$temperatures" | head -n 1)
-echo "Current Temperature: $current_temp"
+echo "Current Temperature: $current_temp $unit_temp"
 
 # Today Data
 today_temp=$(echo "$temperatures" | sed -n 2p)
-echo "Today Temperature: $today_temp"
+echo "Today Temperature: $today_temp $unit_temp"
 
 # Tonight Data
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
-echo "Tonight Temperature: $tonight_temp"
+echo "Tonight Temperature: $tonight_temp $unit_temp"
 
 # Tomorrow Data
 tomorrow_temp=$(echo "$temperatures" | tail -n 1)
-echo "Tomorrow Temperature: $tomorrow_temp"
+echo "Tomorrow Temperature: $tomorrow_temp $unit_temp"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
