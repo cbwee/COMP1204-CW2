@@ -51,7 +51,7 @@ echo "Current Temperature: $current_temp"
 
 # Today Data
 today_temp=$(echo "$temperatures" | sed -n 2p)
-echo "Today Temperature: $
+echo "Today Temperature: $today_temp"
 
 # Tonight Data
 tonight_temp=$(echo "$temperatures" | sed -n 3p)
