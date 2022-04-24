@@ -147,7 +147,15 @@ $login_MySQL<<EOF
 	USE $db_name;
 EOF
 
-if [ $is_raspi = true ] ; then
+# Create Tables
+
+if ["$unit_temp" = "C"]; then
+	echo "Start inserting data"
+elif ["$unit_temp" = "F"]; then
+	echo "Currently this script does not support imperial units"
+fi
+
+if [ $is_raspi = true ]; then
 	CPU_temp_raw=$(cat /sys/class/thermal/thermal_zone0/temp)
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
 	# Use echo -e to display \n as a line break
@@ -176,4 +184,3 @@ if [ $is_raspi = true ] ; then
 		'
 	fi
 fi
-
