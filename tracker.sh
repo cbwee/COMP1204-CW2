@@ -15,6 +15,7 @@ echo "Is Raspberry Pi: $is_raspi"
 # Bash functions for MySQL
 reset_auto_increment_if_empty() {
 	echo -e "Database: $1\nTable: $2"
+	$login_MySQL -e "USE $1; select * from $2;"
 }
 
 # <<<<< Start finding data >>>>>
