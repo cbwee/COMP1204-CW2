@@ -186,7 +186,7 @@ if [ "$unit_temp" = "C" ]; then
 		VALUES(\"$tomorrow_date\", $tomorrow_temp_high, $tomorrow_temp_low, $tomorrow_realFeel, \"$tomorrow_phrase\", NOW());
 		(SELECT * FROM ${tableArr[1]} ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
 		"
-		echo "Data inserted"	
+		echo -e "Data inserted\n"	
 	fi
 elif ["$unit_temp" = "F" ]; then
 	echo "Currently this script does not support imperial units"
@@ -221,6 +221,6 @@ if [ $is_raspi = true ]; then
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
 		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT $num_display_after_insert) ORDER BY ID;\
 		"
-		echo "CPU Temperature inserted"
+		echo -e "CPU Temperature inserted\n"
 	fi
 fi
