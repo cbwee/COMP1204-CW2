@@ -80,9 +80,6 @@ echo "Phrase: $current_phrase"
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
 
-day_of_week=$(echo "$page" | grep '<p class="day-of-week">' | cut -d ">" -f 2 | cut -d "<" -f 1)
-echo "Day of week: $day_of_week"
-
 current_realFeelShade=$(echo "$page" | grep -A1 '<span class="label">RealFeel Shade&#x2122;</span>' | tail -n 1 | cut -d ">" -f 2 | cut -d "&" -f 1)
 echo "RealFeel Shade: $current_realFeelShade $unit_temp"
 
