@@ -177,14 +177,12 @@ if [ "$unit_temp" = "C" ]; then
 				
 		# Insert current weather
 		
-		echo "VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \"$current_air_quality\", NOW());"
-		
 		$login_MySQL -e "\
 		USE $db_name;\
 		SELECT * FROM ${tableArr[0]};\
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
-		\"$current_air_quality\", current_wind, current_wind_gusts, NOW());
+		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
 		"
 		
 		echo "Data inserted"	
