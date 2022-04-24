@@ -41,15 +41,18 @@ reset_auto_increment_if_empty() {
 
 # <<<<< Start finding data >>>>>
 
-unit_temp=$(echo "$page"| grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
+unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
 
 # Find the temperature values
-temperatures=$(echo "$page"| grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
+temperatures=$(echo "$page" | grep '<div class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
 #echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Current Data
 current_temp=$(echo "$temperatures" | head -n 1)
 echo "Current Temperature: $current_temp $unit_temp"
+
+current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
+echo "Current Time: $current_time)"
 
 # Today Data
 today_temp=$(echo "$temperatures" | sed -n 2p)
