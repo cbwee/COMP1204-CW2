@@ -37,7 +37,7 @@ if [ $is_raspi = true ] ; then
 	USE cputemp;\
 	CREATE TABLE IF NOT EXISTS cpuTemp(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
-    	Temperature float NOT NULL,\
+    	Temp_C float NOT NULL,\
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
