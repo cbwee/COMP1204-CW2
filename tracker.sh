@@ -85,10 +85,10 @@ echo "Time: $current_time"
 # Removed realFeelShade because this data is not available at night
 
 current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
-current_air_quality=$( echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+current_air_quality=$(echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Air Quality: $current_aqi, $current_air_quality"
 
-wind_and_gusts=$(echo "$page" | grep '<span class="value">' | cut  -d ">" -f 2 | cut -d "<" -f 1)
+wind_and_gusts=$(echo "$page" | grep '<span class="label">Wind'  -A1 | grep -v "label" | cut -d ">" -f 2 | cut -d "<" -f 1)
 
 current_wind=$(echo "$wind_and_gusts" | head -n 1)
 echo "Wind: $current_wind"
