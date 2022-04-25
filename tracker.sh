@@ -38,7 +38,7 @@ reset_auto_increment_if_empty() {
 	else
 		echo "Table $2 has $rai_count rows of data"
 		if [ $append_data == false ]; then
-			$login_MySQL -e "(USE $1; SELECT * FROM $2 ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;"
+			$login_MySQL -e "USE $1; (SELECT * FROM $2 ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;"
 		fi
 	fi
 	echo
