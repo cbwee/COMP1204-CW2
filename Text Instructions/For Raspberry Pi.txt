@@ -12,3 +12,7 @@ sudo service mysql restart
 
 Install phpMyAdmin:
 https://pimylifeup.com/raspberry-pi-phpmyadmin/
+
+Run the command
+(https://stackoverflow.com/questions/48001569/phpmyadmin-count-parameter-must-be-an-array-or-an-object-that-implements-co):
+sudo sed -i "s/|\s*\((count(\$analyzed_sql_results\['select_expr'\]\)/| (\1)/g" /usr/share/phpmyadmin/libraries/sql.lib.php
