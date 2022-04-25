@@ -3,12 +3,7 @@ sudo apt install mariadb-server
 
 Set the root user to use the mysql_native_password plugin
 from (https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost):
-sudo mysql -u root # I had to use "sudo" since it was a new installation
-mysql> USE mysql;
-mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
-mysql> FLUSH PRIVILEGES;
-mysql> exit;
-sudo service mysql restart
+sudo mysql -u root -e "USE mysql; UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES;" && sudo service mysql restart
 
 Install phpMyAdmin:
 https://pimylifeup.com/raspberry-pi-phpmyadmin/
