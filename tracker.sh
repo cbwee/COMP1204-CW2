@@ -50,11 +50,11 @@ reset_auto_increment_if_empty() {
 
 # <<<<< Start finding data >>>>>
 
-page_title=$(echo "$page" | grep '<title>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
+page_title=$(echo "$page" | grep -E '<title>|<TITLE>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
 
 
-if [[ "$page" == *"Access Denied"* ]]; then
-	echo  -e "\nAccess Denied\n"; exit 1;
+if [[ "$page_title" == "Access Denied" ]]; then
+	echo  -e "\n$page_title\n"; exit 1;
 fi
 
 echo -e "\n\n($page_title)"
