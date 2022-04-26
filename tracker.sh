@@ -134,17 +134,13 @@ echo -e "\nCommand for MySQL login: $login_MySQL\n"
 # An array of table names
 tableArr=("current" "tomorrow" )
 
-#for name in ${tableArr[@]}; do
-#  echo "$name"
-#done
-
-# Try using EOF
+# Try using EOF and create the database
 $login_MySQL<<EOF
 	CREATE DATABASE IF NOT EXISTS $db_name;
 EOF
 
 $login_MySQL -e "USE $db_name;\
-	
+	# Create tables
 	# Current weather
 	CREATE TABLE IF NOT EXISTS ${tableArr[0]}(\
    	ID int UNIQUE NOT NULL AUTO_INCREMENT,\
@@ -196,12 +192,14 @@ if [ "$unit_temp" = "C" ]; then
 		echo -e "Data inserted\n"	
 	fi
 elif ["$unit_temp" = "F" ]; then
+	# It is possible to have the unit F if connecting from the US
 	echo "Currently this script does not support imperial units"
 else
 	echo "Error, unknown unit"
 fi
 
 if [ $is_raspi = true ]; then
+	# Find the CPU temperature by reading the file
 	CPU_temp_raw=$(cat /sys/class/thermal/thermal_zone0/temp)
 	# CPU temperature in degree Celsius
 	CPU_temp_c=$(echo "scale=2;$CPU_temp_raw / 1000" | bc)
@@ -217,9 +215,8 @@ if [ $is_raspi = true ]; then
     	PRIMARY KEY (ID)\
 	);\
 	"
-	#$login_MySQL -e "USE cputemp; SHOW COLUMNS FROM cpuTemp; SELECT * FROM cpuTemp;"
 	
-	#Reset auto increment if table is empty
+	#Reset auto increment if the table is empty
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
 	
 	if [ $append_data == true ]; then
