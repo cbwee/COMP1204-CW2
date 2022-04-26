@@ -51,34 +51,34 @@ reset_auto_increment_if_empty() {
 
 page_title=$(echo "$page" | grep '<title>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
 echo -e "\n\n($page_title)"
-unit_temp=$(echo "$page" | grep '<span class="after-temp">' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
+unit_temp=$(echo "$page" | grep 'class="after-temp"' | cut -d ">" -f 3 | cut -d "<" -f 1 | head -n 1)
 
 # Find the temperature values
-temperatures=$(echo "$page" | grep 'class="temp">' | cut -d "&" -f 1 | cut -d ">" -f 2)
+temperatures=$(echo "$page" | grep 'class="temp"' | cut -d "&" -f 1 | cut -d ">" -f 2)
 # echo -e "\nTemperatures:\n${temperatures}\n"
 
 # Find the date values
-dates=$(echo "$page" | grep 'class="sub-title">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+dates=$(echo "$page" | grep 'class="sub-title"' | cut -d ">" -f 2 | cut -d "<" -f 1)
 # echo -e "\nDates:\n${dates}\n"
 
 # Find the RealFeel values
-realFeels=$(echo "$page" | grep 'class="real-feel">' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
+realFeels=$(echo "$page" | grep 'class="real-feel"' | tail -n 3 | cut -d " " -f 3 | cut -d "&" -f 1)
 # echo -e "\nRealFeels:\n${realFeels}\n"
 
 # Find the phrase values
-phrases=$(echo "$page" | grep 'class="phrase">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+phrases=$(echo "$page" | grep 'class="phrase"' | cut -d ">" -f 2 | cut -d "<" -f 1)
 # echo -e "\nPhrases:\n${phrases}\n"
 
 # Current Data
 echo
 echo "===== Current ====="
-current_date=$(echo "$page" | grep '<p class="date">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+current_date=$(echo "$page" | grep 'class="date"' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Date: $current_date"
 
 current_temp=$(echo "$temperatures" | head -n 1)
 echo "Temperature: $current_temp $unit_temp"
 
-current_realFeel=$(echo "$page" | grep '<div class="real-feel">' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
+current_realFeel=$(echo "$page" | grep 'class="real-feel"' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
 echo "RealFeel: $current_realFeel $unit_temp"
 
 current_phrase=$(echo "$phrases" | sed -n 1p)
@@ -90,11 +90,11 @@ echo "Time: $current_time"
 # Removed day of week because it came "Today" during testing
 # Removed realFeelShade because this data is not available at night
 
-current_aqi=$(echo "$page" | grep '<div class="aq-number">' -A1 | tail -n 1 | xargs)
-current_air_quality=$(echo "$page" | grep '<p class="category-text">' | cut -d ">" -f 2 | cut -d "<" -f 1)
+current_aqi=$(echo "$page" | grep 'class="aq-number"' -A1 | tail -n 1 | xargs)
+current_air_quality=$(echo "$page" | grep 'class="category-text"' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Air Quality: $current_aqi, $current_air_quality"
 
-wind_and_gusts=$(echo "$page" | grep '<span class="label">Wind'  -A1 | grep -v "label" | cut -d ">" -f 2 | cut -d "<" -f 1)
+wind_and_gusts=$(echo "$page" | grep 'class="label">Wind'  -A1 | grep -v "label" | cut -d ">" -f 2 | cut -d "<" -f 1)
 
 current_wind=$(echo "$wind_and_gusts" | head -n 1)
 echo "Wind: $current_wind"
