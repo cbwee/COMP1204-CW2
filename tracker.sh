@@ -54,7 +54,7 @@ page_title=$(echo "$page" | grep -E '<title>|<TITLE>' | cut -d ">" -f 2 | cut -d
 
 
 if [[ "$page_title" == "Access Denied" ]]; then
-	echo  -e "\n$page_title\n"; exit 1;
+	echo  -e "\n$page_title"; exit 1;
 fi
 
 echo -e "\n\n($page_title)"
