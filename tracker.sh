@@ -53,8 +53,8 @@ reset_auto_increment_if_empty() {
 page_title=$(echo "$page" | grep '<title>' | cut -d ">" -f 2 | cut -d "<" -f 1 |sed -s 's/\&amp;/\&/g' | sed -s "s/\&#x27;/\'/g")
 
 
-if [[ "$page_title" == "Access Denied" ]]; then
-	echo "$page_title"
+if [[ "$page" == *"Access Denied"* ]]; then
+	echo "Access Denied"
 fi
 
 echo -e "\n\n($page_title)"
