@@ -20,9 +20,8 @@ user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99
 #user_agent="Test"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 if ! page=$(curl --silent -A "$user_agent" $address) ; then
-	echo "curl failed"; exit 1;
+	echo -e "\ncurl failed"; exit 1;
 fi
-echo "$page"
 db_name="weather_jb"
 echo
 
