@@ -3,20 +3,23 @@
 echo
 # Command line flag
 append_data=false
+display_data=false
+num_display=5;
+
 if [ "$1" == "-a" ]; then
-  append_data=true;
+  append_data=true
+elif [ "$1" == "-d" ]; then
+  display_data=true
+else
+  echo -e "(Use the -a flag if you want to append the data to MySQL database)"
 fi
 echo "Append Data: $append_data"
-if [ $append_data == false ]; then
-	echo -e "(Use the -a flag if you want to append the data to MySQL database)"
-fi
 
 # Assign variables
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 page=$(curl --silent -A "$user_agent" $address)
 db_name="weather_jb"
-num_display=5;
 echo
 
 is_raspi=false
@@ -37,7 +40,7 @@ reset_auto_increment_if_empty() {
 		echo "Auto increment value of $2 is reset to $rai_initial_count"
 	else
 		echo "Table $2 has $rai_count rows of data"
-		if [ $append_data == false ]; then
+		if [ $display_data = true ]; then
 			$login_MySQL -e "USE $1; (SELECT * FROM $2 ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;"
 		fi
 	fi
@@ -184,11 +187,11 @@ if [ "$unit_temp" = "C" ]; then
 		INSERT INTO ${tableArr[0]}(Date, Temp, RealFeel, Phrase, Time, AQI, AirQuality, Wind, WindGusts, DateTime) \
 		VALUES(\"$current_date\", $current_temp, $current_realFeel, \"$current_phrase\", \"$current_time\", $current_aqi, \
 		\"$current_air_quality\", \"$current_wind\", \"$current_wind_gusts\", NOW());
-		(SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;\
+		SELECT * FROM ${tableArr[0]} ORDER BY ID DESC LIMIT 1;\
 		
 		INSERT INTO ${tableArr[1]}(Date, Temp_high, Temp_low, RealFeel, Phrase, DateTime) \
 		VALUES(\"$tomorrow_date\", $tomorrow_temp_high, $tomorrow_temp_low, $tomorrow_realFeel, \"$tomorrow_phrase\", NOW());
-		(SELECT * FROM ${tableArr[1]} ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;\
+		SELECT * FROM ${tableArr[1]} ORDER BY ID DESC LIMIT 1;\
 		"
 		echo -e "Data inserted\n"	
 	fi
@@ -223,8 +226,7 @@ if [ $is_raspi = true ]; then
 		$login_MySQL -e "\
 		USE cputemp;\
 		INSERT INTO cpuTemp(Temp_C, DateTime) VALUES($CPU_temp_c, NOW());\
-		(SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT $num_display_
-		) ORDER BY ID;\
+		SELECT * FROM cpuTemp ORDER BY ID DESC LIMIT 1;\
 		"
 		echo -e "CPU Temperature inserted\n"
 	fi
