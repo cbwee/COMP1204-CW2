@@ -16,8 +16,7 @@ fi
 echo "Append Data: $append_data"
 
 # Assign variables
-#user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 #user_agent="Test"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 db_name="weather_jb"
