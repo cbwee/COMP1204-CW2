@@ -19,10 +19,11 @@ echo "Append Data: $append_data"
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
 #user_agent="Test"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
+db_name="weather_jb"
+
 if ! page=$(curl --silent -A "$user_agent" $address) ; then
 	echo -e "\ncurl failed"; exit 1;
 fi
-db_name="weather_jb"
 echo
 
 is_raspi=false
@@ -95,7 +96,7 @@ echo "Phrase: $current_phrase"
 current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d ">" -f 2 | xargs)
 echo "Time: $current_time"
 
-# Removed day of week because it came "Today" during testing
+# Removed day of week because it became "Today" during testing
 # Removed realFeelShade because this data is not available at night
 
 current_aqi=$(echo "$page" | grep 'class="aq-number"' -A1 | tail -n 1 | xargs)
@@ -110,7 +111,7 @@ echo "Wind: $current_wind"
 current_wind_gusts=$(echo "$wind_and_gusts" | tail -n 1)
 echo "Wind Gusts: $current_wind_gusts"
 
-# Removed Today Data and Tonight Data, because at night today data is not available
+# Removed Today(High) Data and Tonight(Low) Data, because at night Today(High) Data is not available
 
 # Tomorrow Data
 echo
