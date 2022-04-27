@@ -1,6 +1,4 @@
-# COMP1204-CW2
-## Repository for COMP1204 (2022) Coursework 2<br>
-University of Southampton Malaysia<br>
+# COMP1204 Coursework 2 (2022)
+University of Southampton Malaysia
 
-
-A weather tracker for Raspberry Pi and machines running GNU/Linux
+A weather tracker for Raspberry Pi and machines running GNU/Linux.
