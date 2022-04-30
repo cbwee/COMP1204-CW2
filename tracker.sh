@@ -36,13 +36,13 @@ echo "Raspberry Pi: $is_raspi"
 # Bash functions for MySQL
 reset_auto_increment_if_empty() {
 	# echo -e "Database: $1\nTable: $2"
-	rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
+	local rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
 		echo "Table $2 is empty"
 		rai_initial_count=1
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
 		echo "Auto increment value of $2 is reset to $rai_initial_count"
-	else
+	elif [ "$rai_count" -ne "0" ]; then
 		echo "Table $2 has $rai_count rows of data"
 		if [ $display_data = true ]; then
 			$login_MySQL -e "USE $1; (SELECT * FROM $2 ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;"
@@ -52,8 +52,8 @@ reset_auto_increment_if_empty() {
 }
 
 display_last_insert() {
-	echo -e "Database: $1\nTable: $2\nColumn Name: $3"
-	#Use a local variable
+	# echo -e "Database: $1\nTable: $2\nColumn Name: $3"
+	# Use a local variable
 	local count=$($login_MySQL -e "USE $1; SELECT COUNT($3) FROM $2;" | tail -n 1)
 	if [ $count -ne 0 ]; then
 		local last=$($login_MySQL -e "USE $1; SELECT $3 FROM $2 ORDER BY ID DESC LIMIT 1;" | tail -n 1)
