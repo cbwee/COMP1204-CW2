@@ -42,7 +42,7 @@ reset_auto_increment_if_empty() {
 		rai_initial_count=1
 		$login_MySQL -e "USE $1; ALTER TABLE $2 AUTO_INCREMENT = $rai_initial_count;"
 		echo "Auto increment value of $2 is reset to $rai_initial_count"
-	elif [ "$rai_count" -ne "0" ]; then
+	else
 		echo "Table $2 has $rai_count rows of data"
 		if [ $display_data = true ]; then
 			$login_MySQL -e "USE $1; (SELECT * FROM $2 ORDER BY ID DESC LIMIT $num_display) ORDER BY ID;"
@@ -248,6 +248,7 @@ if [ $is_raspi = true ]; then
 	fi
 fi
 
+echo $display_data
 if [ $append_data=false ] && [ $dispaly_data=false ]; then
 	display_last_insert $db_name ${tableArr[0]} "DateTime"
 fi
