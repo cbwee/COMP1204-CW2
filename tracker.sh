@@ -33,7 +33,7 @@ if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv
 fi
 echo "Raspberry Pi: $is_raspi"
 
-# Bash function for MySQL
+# Bash functions for MySQL
 reset_auto_increment_if_empty() {
 	# echo -e "Database: $1\nTable: $2"
 	rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
@@ -50,6 +50,16 @@ reset_auto_increment_if_empty() {
 	fi
 	echo
 }
+
+display_last_insert() {
+	echo -e "Database: $1\nTable: $2\nColumn Name: $3"
+	#Use a local variable
+	local count=$($login_MySQL -e "USE $1; SELECT COUNT($3) FROM $2;" | tail -n 1)
+	if [ $count -ne 0 ]; then
+		local last=$($login_MySQL -e "USE $1; SELECT $3 FROM $2 ORDER BY ID DESC LIMIT 1;")
+		echo "Last Insertion: $last"
+	fi
+	}
 
 # <<<<< Start finding data >>>>>
 
@@ -236,4 +246,8 @@ if [ $is_raspi = true ]; then
 		"
 		echo -e "CPU Temperature inserted\n"
 	fi
+fi
+
+if [ $append_data=false ] && [ $dispaly_data=false ]
+	display_last_insert $db_name ${tableArr[1]} "DateTime"
 fi
