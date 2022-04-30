@@ -250,7 +250,6 @@ fi
 
 
 if [ "$append_data" = false ] && [ "$display_data" = false ]; then
-	echo "Append data: $append_data"
-	echo "Display data: $display_data"
 	display_last_insert $db_name ${tableArr[0]} "DateTime"
 fi
+echo "$rai_count"
