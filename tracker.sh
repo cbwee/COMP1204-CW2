@@ -57,7 +57,7 @@ display_last_insert() {
 	local count=$($login_MySQL -e "USE $1; SELECT COUNT($3) FROM $2;" | tail -n 1)
 	if [ $count -ne 0 ]; then
 		local last=$($login_MySQL -e "USE $1; SELECT $3 FROM $2 ORDER BY ID DESC LIMIT 1;" | tail -n 1)
-		echo "Last Insertion: $last"
+		echo "Last Data Insertion: $last"
 	fi
 	}
 
@@ -248,8 +248,7 @@ if [ $is_raspi = true ]; then
 	fi
 fi
 
-
 if [ "$append_data" = false ] && [ "$display_data" = false ]; then
 	display_last_insert $db_name ${tableArr[0]} "DateTime"
 fi
-echo "$rai_count"
+echo "$rai_initial_count"
