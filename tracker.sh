@@ -248,7 +248,9 @@ if [ $is_raspi = true ]; then
 	fi
 fi
 
-echo $display_data
+
 if [ "$append_data" = false ] && [ "$dispaly_data" = false ]; then
+	echo "Append data: $append_data"
+	echo "Display data: $display_data"
 	display_last_insert $db_name ${tableArr[0]} "DateTime"
 fi
