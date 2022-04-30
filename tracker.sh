@@ -249,5 +249,5 @@ if [ $is_raspi = true ]; then
 fi
 
 if [ $append_data=false ] && [ $dispaly_data=false ]; then
-	display_last_insert $db_name ${tableArr[1]} "DateTime"
+	display_last_insert $db_name ${tableArr[0]} "DateTime"
 fi
