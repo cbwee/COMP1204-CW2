@@ -1,0 +1,5 @@
+Run the command:
+crontab -e
+
+Add the line below and save the file to run the script every 10 minutes:
+*/10 * * * * $HOME/COMP1204-CW2/tracker.sh -a
