@@ -58,6 +58,7 @@ display_last_insert() {
 	if [ $count -ne 0 ]; then
 		local last=$($login_MySQL -e "USE $1; SELECT $3 FROM $2 ORDER BY ID DESC LIMIT 1;" | tail -n 1)
 		echo "Last Data Insertion: $last"
+		echo
 	fi
 	}
 
