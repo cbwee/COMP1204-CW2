@@ -27,7 +27,7 @@ if [ $is_raspi = true ]; then
 	")
 	
 	#echo "$cpu_data"
-	$cpu_data > temp_cpu_data.txt
+	"$cpu_data" > temp_cpu_data.txt
 	
 gnuplot <<- EOF
 	
