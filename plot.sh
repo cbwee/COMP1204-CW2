@@ -38,9 +38,10 @@ gnuplot <<-EOL
 EOL
 '
 gnuplot =e "set title 'CPU Temperature'\
-	set xlabel 'Time'
-	set ylabel 'Temperature (°C)'
-	set output '$HOME/CPU_Temperature.png'
-	set timefmt '\"%Y-%m-%d %H:%M:%S\"'
-	plot '$cpu_data'
+	set xlabel 'Time'\
+	set ylabel 'Temperature (°C)'\
+	set output '$HOME/CPU_Temperature.png'\
+	set timefmt '\"%Y-%m-%d %H:%M:%S\"'\
+	plot '$cpu_data'\
+	"
 fi
