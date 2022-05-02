@@ -1,0 +1,2 @@
+Install gnuplot:
+sudo apt install -y gnuplot
