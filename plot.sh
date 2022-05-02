@@ -31,14 +31,14 @@ if [ $is_raspi = true ]; then
 	echo "# $cpu_data" > $cpu_file_name
 	
 gnuplot <<- EOF
-	
-	set title "CPU Temperature"
-	set xlabel "Time"
+		set xlabel "Time"
 	set ylabel "Temperature (°C)"
 	set xdata time
-	set timefmt '%Y-%m-%d %H:%M:%S'	
-	#set output "$HOME/CPU_Temperature.png"
-	plot "$cpu_file_name" u 1:3 w l t
+	set timefmt '%Y-%m-%d %H:%M:%S'
+	set format x '%Y-%m-%d\n%H:%M'
+	set term png
+	set output "$HOME/CPU_Temperature.png"
+	plot "$cpu_file_name" using 1:3 with lines title "CPU Temperature"
 EOF
 
 fi
