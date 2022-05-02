@@ -29,6 +29,7 @@ if [ $is_raspi = true ]; then
 	#echo "$cpu_data"
 	cpu_file_name="temp_cpu_data.txt"
 	echo "$cpu_data" > $cpu_file_name
+	echo $cpu_file_name
 	
 gnuplot <<- EOF
 	
@@ -37,7 +38,7 @@ gnuplot <<- EOF
 	set ylabel "Temperature (°C)"
 	set output "$HOME/CPU_Temperature.png"
 	set timefmt '"%Y-%m-%d %H:%M:%S"'
-	plot $cpu_file_name
+	#plot $cpu_file_name
 EOF
 
 fi
