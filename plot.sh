@@ -28,7 +28,7 @@ if [ $is_raspi = true ]; then
 	
 	#echo "$cpu_data"
 	cpu_file_name="temp_cpu_data.txt"
-	echo "# $cpu_data" > $cpu_file_name
+	echo "# $cpu_data" > dev/shm/$cpu_file_name
 	
 gnuplot <<- EOF
 	set title "CPU Temperature"
@@ -42,5 +42,5 @@ gnuplot <<- EOF
 	set output "$HOME/CPU_Temperature.png"
 	plot "$cpu_file_name" using 1:3 with lines notitle
 EOF
-	rm $cpu_file_name
+	rm dev/shm/$cpu_file_name
 fi
