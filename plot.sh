@@ -36,6 +36,7 @@ gnuplot <<- EOF
 	set xdata time
 	set timefmt '%Y-%m-%d %H:%M:%S'
 	set format x "%Y-%m-%d\n%H:%M"
+	set xtics 60*60
 	set term png
 	set output "$HOME/CPU_Temperature.png"
 	plot "$cpu_file_name" using 1:3 with lines title "CPU Temperature"
