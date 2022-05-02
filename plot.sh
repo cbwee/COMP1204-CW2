@@ -43,5 +43,5 @@ gnuplot <<- EOF
 	set output "$HOME/CPU_Temperature.png"
 	plot "$cpu_file_name" using 1:3 with lines notitle
 EOF
-	#rm $cpu_file_name
+	rm $cpu_file_name
 fi
