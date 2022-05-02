@@ -12,3 +12,9 @@ if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv
 	is_raspi=true
 fi
 echo "Raspberry Pi: $is_raspi"
+
+if [ $is_raspi = true ]; then
+	gnuplot <<-EOL
+	set title "CPU Temperature"
+	EOL
+fi
