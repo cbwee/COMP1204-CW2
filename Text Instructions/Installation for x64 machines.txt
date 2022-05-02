@@ -5,12 +5,6 @@ Run the installer:
 chmod 755 xampp-linux-*-installer.run
 sudo ./xampp-linux-*-installer.run
 
-Restart the server:
-sudo /opt/lampp/lampp start
-
-Log in MySQL as root user:
-/opt/lampp/bin/mysql -u root
-
 Add XAMPP to environment variables:
 sudo nano /etc/environment
 
