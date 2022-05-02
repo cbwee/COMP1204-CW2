@@ -40,6 +40,6 @@ gnuplot <<- EOF
 	set xtics 60*60*12
 	set term png
 	set output "$HOME/CPU_Temperature.png"
-	plot "$cpu_file_name" using 1:3 with lines
+	plot "$cpu_file_name" using 1:3 with lines notitle
 EOF
 fi
