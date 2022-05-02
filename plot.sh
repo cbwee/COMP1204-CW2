@@ -34,6 +34,6 @@ gnuplot <<-EOL
 	set ylabel "Temperature (°C)"
 	set output "$HOME/CPU_Temperature.png"
 	set timefmt '"%Y-%m-%d %H:%M:%S"'
-	plot "$cpu_data"
+	plot $cpu_data
 EOL
 fi
