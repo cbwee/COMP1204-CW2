@@ -20,6 +20,8 @@ user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99
 #user_agent="Test"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 db_name="weather_jb"
+# An array of table names
+tableArr=("current" "tomorrow" )
 
 if ! page=$(curl --silent -A "$user_agent" $address) ; then
 	echo -e "\ncurl failed"; exit 1;
@@ -151,8 +153,6 @@ fi
 echo -e "\nCommand for MySQL login: $login_MySQL\n"
 
 # <<<<< Create Database and Tables >>>>>
-# An array of table names
-tableArr=("current" "tomorrow" )
 
 # Try using EOF and create the database
 $login_MySQL<<EOF
@@ -188,6 +188,17 @@ $login_MySQL -e "USE $db_name;\
     	DateTime DateTime NOT NULL,\
     	PRIMARY KEY (ID)\
 	);\
+	
+	# Create Views
+	# Current average
+	CREATE VIEW IF NOT EXISTS ${tableArr[0]}_avg AS \
+	SELECT Date, MAX(Temp) as High, MIN(Temp) as Low, AVG(Temp) as Average, AVG(RealFeel) as RealFeel \
+	FROM current GROUP BY Date;\
+	
+	# Tomorrow average
+	CREATE VIEW IF NOT EXISTS ${tableArr[1]}_avg AS \
+	SELECT Date, AVG(Temp_high) as High, AVG(Temp_low) as Low, AVG((Temp_high + Temp_Low) / 2) as Average, AVG(RealFeel) as RealFeel \
+	FROM tomorrow GROUP BY Date;\
 	"
 	
 for table_name in ${tableArr[@]}; do
