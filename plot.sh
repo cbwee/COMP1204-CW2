@@ -26,10 +26,13 @@ if [ $is_raspi = true ]; then
 	SELECT DateTime, Temp_C FROM cpuTemp;
 	")
 	
-	echo "$cpu_data";
-	
+	#echo "$cpu_data";	
 
 gnuplot <<-EOL
 	set title "CPU Temperature"
+	set xlabel "Time"
+	set ylabel "Temperature (°C)"
+	set output "$HOME/CPU_Temperature.png"
+	plot "$cpu_data"
 EOL
 fi
