@@ -38,7 +38,7 @@ gnuplot <<- EOF
 	set xdata time
 	set timefmt '%Y-%m-%d %H:%M:%S'	
 	#set output "$HOME/CPU_Temperature.png"
-	plot "$cpu_file_name" u 1:3 w l t 'data'
+	plot "$cpu_file_name" u 1:3 w l t
 EOF
 
 fi
