@@ -192,7 +192,7 @@ $login_MySQL -e "USE $db_name;\
 	# Create Views
 	# Current average
 	CREATE VIEW IF NOT EXISTS ${tableArr[0]}_avg AS \
-	SELECT Date, MAX(Temp) + 0 as High, MIN(Temp) + 0 as Low, AVG(Temp) as Average, AVG(RealFeel) as RealFeel \
+	SELECT Date, MAX(Temp) + 0.0 as High, MIN(Temp) + 0.0 as Low, AVG(Temp) as Average, AVG(RealFeel) as RealFeel \
 	FROM current GROUP BY Date;\
 	
 	# Tomorrow average
