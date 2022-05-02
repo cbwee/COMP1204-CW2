@@ -29,6 +29,10 @@ if [ $is_raspi = true ]; then
 	#echo "$cpu_data";	
 	
 gnuplot <<-EOL
+	
+	$data << EOD
+		$cpu_data
+	EOD
 	set title "CPU Temperature"
 	set xlabel "Time"
 	set ylabel "Temperature (°C)"
