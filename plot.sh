@@ -14,7 +14,7 @@ fi
 echo "Raspberry Pi: $is_raspi"
 
 if [ $is_raspi = true ]; then
-	gnuplot <<-EOL
+gnuplot <<-EOL
 	set title "CPU Temperature"
-	EOL
+EOL
 fi
