@@ -13,7 +13,22 @@ if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv
 fi
 echo "Raspberry Pi: $is_raspi"
 
+login_MySQL="mysql -u root"
+# If the script is not running on Raspberry Pi
+if [ $is_raspi = false ] ; then
+	login_MySQL="/opt/lampp/bin/${login_MySQL}"
+fi
+echo -e "\nCommand for MySQL login: $login_MySQL\n"
+
 if [ $is_raspi = true ]; then
+
+	cpu_data=$($login_MySQL -e "USE cputemp;\
+	SELECT DateTime, Temp_C FROM cpuTemp;
+	")
+	
+	echo "$cpu_data";
+	
+
 gnuplot <<-EOL
 	set title "CPU Temperature"
 EOL
