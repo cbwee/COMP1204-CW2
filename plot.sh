@@ -5,7 +5,10 @@ echo
 # Assign variables
 db_name="weather_jb"
 tableArr=("current" "tomorrow" )
+
 temp="/dev/shm/"
+cpu_file_name="${temp}temp_cpu_data.txt"
+current_t_file_name="${temp}ct_data.txt"
 
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
@@ -28,7 +31,6 @@ if [ $is_raspi = true ]; then
 	")
 	
 	#echo "$cpu_data"
-	cpu_file_name="${temp}temp_cpu_data.txt"
 	echo "# $cpu_data" > $cpu_file_name
 	
 gnuplot <<- EOF
