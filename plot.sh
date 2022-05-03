@@ -156,7 +156,7 @@ EOF
 fi
 
 echo "Plots generated, saved in directory: $directory"
-
+echo
 for i in "${finished_plots[@]}"
 do
 	echo $i
