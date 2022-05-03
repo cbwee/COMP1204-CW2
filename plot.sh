@@ -6,6 +6,9 @@ echo
 db_name="weather_jb"
 tableArr=("current" "tomorrow" )
 
+png_size="set term png size 2160,1440 font ,20"
+set_xtics="set xtics font ',12'; set xtics 60*60*12"
+xtime="set xdata time; set timefmt '%Y-%m-%d %H:%M:%S'; set format x '%Y-%m-%d\n%H:%M'"
 temp="/dev/shm/"
 cpu_file_name="${temp}temp_cpu_data.txt"
 current_t_file_name="${temp}ct_data.txt"
@@ -37,11 +40,9 @@ gnuplot <<- EOF
 	set title "CPU Temperature"
 	set xlabel "Time"
 	set ylabel "Temperature (°C)"
-	set xdata time
-	set timefmt '%Y-%m-%d %H:%M:%S'
-	set format x "%Y-%m-%d\n%H:%M"
-	set xtics 60*60*12
-	set term png
+	$xtime
+	$set_xtics	
+	$png_size
 	set output "$HOME/CPU_Temperature.png"
 	plot "$cpu_file_name" using 1:3 with lines notitle
 EOF
