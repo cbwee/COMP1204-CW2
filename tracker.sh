@@ -6,12 +6,13 @@ append_data=false
 display_data=false
 num_display=5;
 
+plot_files=false;
 if [ "$1" == "-a" ]; then
 	append_data=true
 elif [ "$1" == "-d" ]; then
 	display_data=true
 elif [ "$1" == "-p" ]; then
-	bash ./plot.sh
+	plot_files=true
 else
   echo -e "(Use the -a flag if you want to append the data to MySQL database)"
 fi
@@ -264,4 +265,9 @@ fi
 
 if [ "$append_data" = false ] && [ "$display_data" = false ]; then
 	display_last_insert $db_name ${tableArr[0]} "DateTime"
+fi
+
+if [ "$plot_files" = true ]; then
+	chmod u+x plot.sh
+	bash ./plot.sh
 fi
