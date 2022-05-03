@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo
-# Command line flag
+# Command line flags
+plot_files=false;
 append_data=false
 display_data=false
 num_display=5;
 
-plot_files=false;
 if [ "$1" == "-a" ]; then
 	append_data=true
 elif [ "$1" == "-d" ]; then
@@ -20,9 +20,9 @@ echo "Append Data: $append_data"
 
 # Assign variables
 user_agent="Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 SotonCOMP1204/2.0"
-#user_agent="Test"
 address="https://www.accuweather.com/en/my/johor-bahru/228029/weather-forecast/228029"
 db_name="weather_jb"
+
 # An array of table names
 tableArr=("current" "tomorrow" )
 
@@ -40,7 +40,6 @@ echo "Raspberry Pi: $is_raspi"
 
 # Bash functions for MySQL
 reset_auto_increment_if_empty() {
-	# echo -e "Database: $1\nTable: $2"
 	local rai_count=$($login_MySQL -e "USE $1; SELECT COUNT(*) from $2;" | tail -n 1)
 	if [ "$rai_count" -eq "0" ]; then
 		echo "Table $2 is empty"
@@ -65,7 +64,7 @@ display_last_insert() {
 		echo "Last Data Insertion: $last"
 		echo
 	fi
-	}
+}
 
 # <<<<< Start finding data >>>>>
 
@@ -113,7 +112,7 @@ current_time=$(echo "$page" | grep 'cur-con-weather-card__subtitle' -A1 | cut -d
 echo "Time: $current_time"
 
 # Removed day of week because it became "Today" during testing
-# Removed realFeelShade because this data is not available at night
+# Removed realFeelShade because the data is not available at night
 
 current_aqi=$(echo "$page" | grep 'class="aq-number"' -A1 | tail -n 1 | xargs)
 current_air_quality=$(echo "$page" | grep 'class="category-text"' | cut -d ">" -f 2 | cut -d "<" -f 1)
@@ -227,7 +226,7 @@ if [ "$unit_temp" = "C" ]; then
 	fi
 elif ["$unit_temp" = "F" ]; then
 	# It is possible to have the unit F if connecting from the US
-	echo "Currently this script does not support imperial units"
+	echo "This script does not support imperial units"
 else
 	echo "Error, unknown unit"
 fi
@@ -250,7 +249,7 @@ if [ $is_raspi = true ]; then
 	);\
 	"
 	
-	#Reset auto increment if the table is empty
+	# Reset auto increment if the table is empty
 	reset_auto_increment_if_empty "cputemp" "cpuTemp"
 	
 	if [ $append_data == true ]; then
