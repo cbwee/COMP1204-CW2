@@ -270,5 +270,5 @@ fi
 
 if [ "$plot_files" = true ]; then
 	chmod u+x plot.sh
-	bash ./plot.sh
+	/bin/bash ./plot.sh
 fi
