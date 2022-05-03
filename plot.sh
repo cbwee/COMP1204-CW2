@@ -21,6 +21,9 @@ current_fn="${temp}${tableArr[0]}_temperature_data_plot.txt"
 avgc_fn="${temp}average_${tableArr[0]}_plot.txt"
 avgt_fn="${temp}average_${tableArr[1]}_plot.txt"
 
+# An array that stores the names of files generated
+finished_plots()
+
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi
 if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
@@ -64,7 +67,8 @@ gnuplot <<- EOF
 	"$current_fn" using 1:4 with lines title "RealFeel" ls 2
 EOF
 # Delete the file	
-rm $current_fn	
+rm $current_fn
+finished_plots+=("${plotName[0]}")
 	
 # Plot 2
 
@@ -118,6 +122,7 @@ EOF
 # Delete the files
 rm $avgc_fn
 rm $avgt_fn
+finished_plots+=("${plotName[1]}")
 
 # Plot 3, only for Raspberry Pi
 if [ $is_raspi = true ]; then
@@ -147,11 +152,12 @@ gnuplot <<- EOF
 	plot "$cpu_fn" using 1:3 with lines notitle ls 1
 EOF
 	rm $cpu_fn
+	finished_plots+=("${plotName[2]}")
 fi
 
 echo "Plots generated, saved in directory: $directory"
 
-for i in "${plotName[@]}"
+for i in "${finished_plots[@]}"
 do
 	echo $i
 done
