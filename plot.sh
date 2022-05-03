@@ -61,7 +61,7 @@ gnuplot <<- EOF
 	$png_size
 	set output "${directory}/${plotName[0]}"
 	# set line colours
-	set style line 1 lc rgb "#93c701"
+	set style line 1 lc rgb "#288adb"
 	set style line 2 lc rgb "#f05514"	
 	plot "$current_fn" using 1:3 with lines title "Temperature" ls 1, \
 	"$current_fn" using 1:4 with lines title "RealFeel" ls 2
