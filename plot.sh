@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo
 
 # Assign variables
@@ -25,14 +24,14 @@ is_raspi=false
 if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
-echo "Raspberry Pi: $is_raspi"
+# echo "Raspberry Pi: $is_raspi"
 
 login_MySQL="mysql -u root"
 # If the script is not running on Raspberry Pi
 if [ $is_raspi = false ] ; then
 	login_MySQL="/opt/lampp/bin/${login_MySQL}"
 fi
-echo -e "\nCommand for MySQL login: $login_MySQL\n"
+# echo -e "\nCommand for MySQL login: $login_MySQL\n"
 
 # Plot 1
 current_data=$($login_MySQL -e "USE $db_name;\
@@ -58,6 +57,8 @@ gnuplot <<- EOF
 	plot "$current_fn" using 1:3 with lines title "Temperature" ls 1, \
 	"$current_fn" using 1:4 with lines title "RealFeel" ls 2
 EOF
+	
+rm $current_fn	
 	
 # Plot 2
 
@@ -102,8 +103,8 @@ gnuplot <<- EOF
 	"$avgt_fn" using 1:4 with linespoints title "Tomorrow Average" ls 6
 EOF
 
-#rm files
-
+rm $avgc_fn
+rm $avgt_fn
 
 # Plot 3, only for Raspberry Pi
 if [ $is_raspi = true ]; then
@@ -133,3 +134,11 @@ gnuplot <<- EOF
 EOF
 	rm $cpu_fn
 fi
+
+echo "Plots generated, saved in $directory"
+
+for i in "${plotName[@]}"
+do
+	echo $i
+done
+echo
