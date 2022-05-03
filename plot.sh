@@ -80,27 +80,29 @@ gnuplot <<- EOF
 	$xyfonts
 	set xtics font ',16'
 	set xtics 60*60*24
-	
+	set xtics scale 1,0
 	set ytics 0.5	
 	set yrange[24:35]
-	set xrange [time(0) - 9*24*60*60:]
+	set xrange [time(0) - 11*24*60*60:time(0)]
 	set key font ',14'
 	$png_size
 	set output "${directory}/${plotName[1]}"
-	set style line 1 lc rgb "#ff1744" lw 2
-	set style line 2 lc rgb "#00b0ff" lw 2
-	set style line 3 lc rgb "#00e676" lw 2
-	set style line 4 lc rgb "#ff616f"
-	set style line 5 lc rgb "#69e2ff"
-	set style line 6 lc rgb "#66ffa6"
+	set style line 1 lc rgb "#ff1744" lw 2 pt 5
+	set style line 2 lc rgb "#00b0ff" lw 2 pt 5
+	set style line 3 lc rgb "#00e676" lw 2 pt 5
+	set style line 4 lc rgb "#ff616f" pt 5
+	set style line 5 lc rgb "#69e2ff" pt 5
+	set style line 6 lc rgb "#66ffa6" pt 5
 	plot \
-	"$avgc_fn" using 1:2 with lines title "High" ls 1, \
-	"$avgc_fn" using 1:3 with lines title "Low" ls 2, \
-	"$avgc_fn" using 1:4 with lines title "Average" ls 3, \
-	"$avgt_fn" using 1:2 with lines title "Tomorrow High" ls 4, \
-	"$avgt_fn" using 1:3 with lines title "Tomorrow Low" ls 5, \
-	"$avgt_fn" using 1:4 with lines title "Tomorrow Average" ls 6
+	"$avgc_fn" using 1:2 with linespoints title "High" ls 1, \
+	"$avgc_fn" using 1:3 with linespoints title "Low" ls 2, \
+	"$avgc_fn" using 1:4 with linespoints title "Average" ls 3, \
+	"$avgt_fn" using 1:2 with linespoints title "Tomorrow High" ls 4, \
+	"$avgt_fn" using 1:3 with linespoints title "Tomorrow Low" ls 5, \
+	"$avgt_fn" using 1:4 with linespoints title "Tomorrow Average" ls 6
 EOF
+
+#rm files
 
 
 # Plot 3, only for Raspberry Pi
@@ -122,6 +124,7 @@ gnuplot <<- EOF
 	set xtics font ',10'
 	set xrange [time(0) - 7*24*60*60:]
 	set xtics 60*60*6;
+	set xtics scale 1,0
 	set ytics 1	
 	$png_size
 	set output "${directory}/${plotName[2]}"
