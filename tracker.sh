@@ -100,10 +100,10 @@ current_date=$(echo "$page" | grep 'class="date"' | cut -d ">" -f 2 | cut -d "<"
 echo "Date: $current_date"
 
 current_temp=$(echo "$temperatures" | head -n 1)
-echo "Temperature: $current_temp $unit_temp"
+echo "Temperature: $current_temp °$unit_temp"
 
 current_realFeel=$(echo "$page" | grep 'class="real-feel"' -A2 | sed -n 3p | cut -d "&" -f 1 | xargs)
-echo "RealFeel: $current_realFeel $unit_temp"
+echo "RealFeel: $current_realFeel °$unit_temp"
 
 current_phrase=$(echo "$phrases" | sed -n 1p)
 echo "Phrase: $current_phrase"
@@ -135,13 +135,13 @@ tomorrow_date=$(echo "$dates" | tail -n 1)
 echo "Date: $tomorrow_date"
 
 tomorrow_temp_high=$(echo "$temperatures" | tail -n 1)
-echo "Temperature High: $tomorrow_temp_high $unit_temp"
+echo "Temperature High: $tomorrow_temp_high °$unit_temp"
 
 tomorrow_temp_low=$(echo "$page" | grep 'class="after-temp">/' | cut -d " " -f 4 | cut -d "&" -f 1)
-echo "Temperature Low: $tomorrow_temp_low $unit_temp"
+echo "Temperature Low: $tomorrow_temp_low °$unit_temp"
 
 tomorrow_realFeel=$(echo "$realFeels" | tail -n 1)
-echo "RealFeel: $tomorrow_realFeel $unit_temp"
+echo "RealFeel: $tomorrow_realFeel °$unit_temp"
 
 tomorrow_phrase=$(echo "$phrases" | tail -n 1)
 echo "Phrase: $tomorrow_phrase"
