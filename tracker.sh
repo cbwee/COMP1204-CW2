@@ -200,6 +200,7 @@ $login_MySQL -e "USE $db_name;\
 	SELECT CONCAT(Date, "/", YEAR(DateTime)) as "Date", AVG(Temp_high) as High, AVG(Temp_low) as Low, AVG((Temp_high + Temp_Low) / 2) as Average, AVG(RealFeel) as RealFeel \
 	FROM ${tableArr[1]} GROUP BY Date;\
 	"
+	echo ${tableArr[0]}
 	
 for table_name in ${tableArr[@]}; do
   reset_auto_increment_if_empty $db_name $table_name
