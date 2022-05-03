@@ -7,9 +7,11 @@ display_data=false
 num_display=5;
 
 if [ "$1" == "-a" ]; then
-  append_data=true
+	append_data=true
 elif [ "$1" == "-d" ]; then
-  display_data=true
+	display_data=true
+elif [ "$1" == "-p" ]; then
+	bash ./plot.sh
 else
   echo -e "(Use the -a flag if you want to append the data to MySQL database)"
 fi
