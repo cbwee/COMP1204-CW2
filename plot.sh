@@ -8,13 +8,13 @@ tableArr=("current" "tomorrow" )
 
 png_size="set term png size 2160,1440 font ,20"
 set_xtics="set xtics font ',12'; set xtics 60*60*12"
-xtime="set xdata time; set timefmt '%Y-%m-%d %H:%M:%S'; set format x '%Y-%m-%d\n%H:%M'"
+xtime="set xdata time; set timefmt '%Y-%m-%d %H:%M:%S'; set format x \"%Y-%m-%d\n%H:%M\""
 temp="/dev/shm/"
 cpu_file_name="${temp}temp_cpu_data.txt"
 current_t_file_name="${temp}ct_data.txt"
 
 is_raspi=false
-# Check if this computer is a 64-bit/32-bit Raspberry Pi (running GNU/Linux, not Android)
+# Check if this computer is a 64-bit/32-bit Raspberry Pi
 if [[ $(uname -r) == @(*"v8+"|*"v7l+") ]] && [[ $(uname -m) == @("aarch64"|"armv7l") ]] && [[ $(uname -o) == "GNU/Linux" ]]; then
 	is_raspi=true
 fi
