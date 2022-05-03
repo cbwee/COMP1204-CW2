@@ -22,7 +22,7 @@ avgc_fn="${temp}average_${tableArr[0]}_plot.txt"
 avgt_fn="${temp}average_${tableArr[1]}_plot.txt"
 
 # An array that stores the names of files generated
-finished_plots()
+finished_plots=()
 
 is_raspi=false
 # Check if this computer is a 64-bit/32-bit Raspberry Pi
