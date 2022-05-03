@@ -1,8 +1,8 @@
 Install MySQL server:
-sudo apt install mariadb-server
+sudo apt install -y mariadb-server
 
 Set the root user to use the mysql_native_password plugin
-from (https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost):
+(https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost):
 sudo mysql -u root -e "USE mysql; UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES;" && sudo service mysql restart
 
 Install phpMyAdmin:
@@ -11,3 +11,16 @@ https://pimylifeup.com/raspberry-pi-phpmyadmin/
 Run the command
 (https://stackoverflow.com/questions/48001569/phpmyadmin-count-parameter-must-be-an-array-or-an-object-that-implements-co):
 sudo sed -i "s/|\s*\((count(\$analyzed_sql_results\['select_expr'\]\)/| (\1)/g" /usr/share/phpmyadmin/libraries/sql.lib.php
+
+Login phpMyAdmin automatically
+(https://stackoverflow.com/questions/5687970/auto-login-phpmyadmin):
+
+Run the command:
+sudo nano /etc/phpmyadmin/config.inc.php
+
+Find the line "$cfg['Servers'][$i]['auth_type'] = 'cookie';", 
+replace it with the code below (change the user and password to the ones that were set previously):
+
+$cfg['Servers'][$i]['auth_type'] = 'config';
+$cfg['Servers'][$i]['user'] = 'root';
+$cfg['Servers'][$i]['password'] = 'your_password';
