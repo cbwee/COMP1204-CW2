@@ -158,8 +158,8 @@ fi
 
 echo "Plots generated, saved in directory: $directory"
 echo
-for i in "${finished_plots[@]}"
+for finished_plot in "${finished_plots[@]}"
 do
-	echo $i
+	echo $finished_plot
 done
 echo
