@@ -87,7 +87,7 @@ echo "# $avgc" > $avgc_fn
 echo "# $avgt" > $avgt_fn
 	
 gnuplot << EOF
-	set title "Average temperature"
+	set title "Average Temperature"
 	$y_tc
 	$xdate
 	$xyfonts
