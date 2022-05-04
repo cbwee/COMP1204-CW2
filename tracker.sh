@@ -14,7 +14,7 @@ elif [ "$1" == "-d" ]; then
 elif [ "$1" == "-p" ]; then
 	plot_files=true
 else
-  echo -e "(Use the -a flag if you want to append the data to MySQL database)\n(Use the -p flag if you want to generate plots)\n"
+  echo -e "Use -a to append the data to database\nUse -d to display the last $num_display rows of data\nUse -p to generate plots\n"
 fi
 echo "Append Data: $append_data"
 
