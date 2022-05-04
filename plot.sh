@@ -91,7 +91,7 @@ gnuplot <<- EOF
 	$y_tc
 	$xdate
 	$xyfonts
-	set xtics font ',16'
+	set xtics font ',14'
 	set xtics 60*60*24
 	# hide minor tics
 	set xtics scale 1,0
