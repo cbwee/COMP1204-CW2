@@ -98,8 +98,8 @@ gnuplot <<- EOF
 	# tics for every 0.5 degree
 	set ytics 0.5
 	set yrange[24:35]
-	# range from 14 days ago until now
-	set xrange [time(0) - 14*24*60*60:time(0)]
+	# range from 15 days ago until yesterday
+	set xrange [time(0) - 15*24*60*60:time(0) - 24*60*60]
 	set key font ',14'
 	$png_size
 	set output "${directory}/${plotName[1]}"
