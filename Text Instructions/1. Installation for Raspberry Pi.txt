@@ -1,5 +1,5 @@
 Install MySQL server:
-sudo apt install -y mariadb-server
+sudo apt install mariadb-server -y
 
 Set the root user to use the mysql_native_password plugin
 (https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost):
