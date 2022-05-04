@@ -43,7 +43,7 @@ current_data=$($login_MySQL -e "USE $db_name;\
 # Store the data in a file	
 echo "# $current_data" > $current_fn
 	
-gnuplot <<- EOF
+gnuplot << EOF
 	set title "Temperature and RealFeel"
 	$x_dt
 	$y_tc
@@ -86,7 +86,7 @@ avgt=$($login_MySQL -e "USE $db_name;\
 echo "# $avgc" > $avgc_fn
 echo "# $avgt" > $avgt_fn
 	
-gnuplot <<- EOF
+gnuplot << EOF
 	set title "Average temperature"
 	$y_tc
 	$xdate
