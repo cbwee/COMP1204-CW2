@@ -118,7 +118,7 @@ current_aqi=$(echo "$page" | grep 'class="aq-number"' -A1 | tail -n 1 | xargs)
 current_air_quality=$(echo "$page" | grep 'class="category-text"' | cut -d ">" -f 2 | cut -d "<" -f 1)
 echo "Air Quality: $current_aqi, $current_air_quality"
 
-wind_and_gusts=$(echo "$page" | grep 'class="label">Wind'  -A1 | grep -v "label" | cut -d ">" -f 2 | cut -d "<" -f 1)
+wind_and_gusts=$(echo "$page" | grep 'class="label">Wind' -A1 | grep -v "label" | cut -d ">" -f 2 | cut -d "<" -f 1)
 
 current_wind=$(echo "$wind_and_gusts" | head -n 1)
 echo "Wind: $current_wind"
@@ -157,7 +157,7 @@ echo -e "\nCommand for MySQL login: $login_MySQL\n"
 # <<<<< Create Database and Tables >>>>>
 
 # Try using EOF and create the database
-$login_MySQL<<EOF
+$login_MySQL << EOF
 	CREATE DATABASE IF NOT EXISTS $db_name;
 EOF
 
