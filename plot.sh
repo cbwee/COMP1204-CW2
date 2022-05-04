@@ -56,8 +56,8 @@ gnuplot <<- EOF
 	set xtics 60*60*12;
 	# set range from 25 to 41 degrees
 	set yrange[25:41]
-	# set range starting from 0 days ago
-	set xrange [time(0) - 9*24*60*60:]
+	# range from 10 days ago until now
+	set xrange [time(0) - 10*24*60*60:time(0)]
 	$png_size
 	set output "${directory}/${plotName[0]}"
 	# set line colours
@@ -140,7 +140,7 @@ gnuplot <<- EOF
 	$xtime
 	$xyfonts
 	set xtics font ',10'
-	set xrange [time(0) - 7*24*60*60:]
+	set xrange [time(0) - 8*24*60*60:time(0)]
 	# tics for every 6 hours
 	set xtics 60*60*6;
 	# hide minor tics
