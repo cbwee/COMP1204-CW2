@@ -137,6 +137,7 @@ gnuplot <<- EOF
 	set title "CPU Temperature"
 	$x_dt
 	$y_tc
+	set autoscale y
 	$xtime
 	$xyfonts
 	set xtics font ',10'
