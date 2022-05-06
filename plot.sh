@@ -40,7 +40,7 @@ fi
 current_data=$($login_MySQL -e "USE $db_name;\
 	SELECT DateTime, Temp, RealFeel FROM ${tableArr[0]};")
 	
-# Store the data in a file	
+# Store the data in a file, add # to comment the first line which is the column names	
 echo "# $current_data" > $current_fn
 	
 gnuplot << EOF
@@ -82,7 +82,7 @@ avgc=$($login_MySQL -e "USE $db_name;\
 avgt=$($login_MySQL -e "USE $db_name;\
 	SELECT Date, High, Low, Average FROM $tavg;")
 
-# Save data to files
+# Save the data into files
 echo "# $avgc" > $avgc_fn
 echo "# $avgt" > $avgt_fn
 	
