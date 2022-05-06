@@ -156,7 +156,7 @@ EOF
 	finished_plots+=("${plotName[2]}")
 fi
 
-echo "Plots generated, saved in directory: $directory"
+echo "${#finished_plots[@]} plots generated, saved in directory: $directory"
 echo
 for finished_plot in "${finished_plots[@]}"
 do
