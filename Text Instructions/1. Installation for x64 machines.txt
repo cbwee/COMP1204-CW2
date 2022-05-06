@@ -8,7 +8,7 @@ sudo ./xampp-linux-*-installer.run
 Add XAMPP to environment variables:
 sudo nano /etc/environment
 
-Add the line below to the PATH variable  (within the quotation marks) and save the file (ctrl + s and ctrl + x):
+Add the line below to the PATH variable (within the quotation marks) and save the file (ctrl + s and ctrl + x):
 :/opt/lampp:/opt/lampp/bin
 
 Run the command to use crontab as the root user:
