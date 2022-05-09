@@ -196,13 +196,13 @@ $login_MySQL -e "USE $db_name;\
 	CREATE VIEW IF NOT EXISTS ${tableArr[0]}_avg AS \
 	SELECT CONCAT(Date, '/', YEAR(DateTime)) as Date, MAX(Temp) + 0.0000 as High, MIN(Temp) + 0.0000 as Low, AVG(Temp) as Average, \
 	AVG(RealFeel) as RealFeel \
-	FROM ${tableArr[0]} GROUP BY Date;\
+	FROM ${tableArr[0]} GROUP BY Date ORDER BY DateTime ASC;\
 	
 	# Tomorrow average
 	CREATE VIEW IF NOT EXISTS ${tableArr[1]}_avg AS \
 	SELECT CONCAT(Date, '/', YEAR(DateTime)) as Date, AVG(Temp_high) as High, AVG(Temp_low) as Low, AVG((Temp_high + Temp_Low) / 2) as Average, \
 	AVG(RealFeel) as RealFeel \
-	FROM ${tableArr[1]} GROUP BY Date;\
+	FROM ${tableArr[1]} GROUP BY Date ORDER BY DateTime ASC;\
 	"
 	
 for table_name in ${tableArr[@]}; do
